@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point to Line Distance Visualization</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            cursor: move;
+        }
+        .nav {
+            margin-bottom: 20px;
+            align-self: flex-start;
+        }
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+        .formula {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 3px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .instructions {
+            margin-top: 10px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <button onclick="window.location.href='index.html'">← Back to Index</button>
+    </div>
+    <h1>Point to Line Distance Visualization</h1>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <div class="info">
+        <h3>Distance Calculation:</h3>
+        <div class="formula" id="distanceFormula"></div>
+        <div class="formula" id="distanceValue"></div>
+        <div class="instructions">
+            <strong>Instructions:</strong> Drag the red point or the blue line endpoints to see the distance change.
+            The green line shows the perpendicular distance from the point to the line.
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Line defined by two points
+        let lineP1 = { x: 100, y: 400 };
+        let lineP2 = { x: 700, y: 200 };
+        
+        // Point to measure distance from
+        let point = { x: 400, y: 100 };
+        
+        // Dragging state
+        let dragging = null;
+        const GRAB_RADIUS = 10;
+        
+        // Calculate distance from point to line
+        function pointToLineDistance(px, py, x1, y1, x2, y2) {
+            const A = y2 - y1;
+            const B = x1 - x2;
+            const C = x2 * y1 - x1 * y2;
+            
+            const distance = Math.abs(A * px + B * py + C) / Math.sqrt(A * A + B * B);
+            return { distance, A, B, C };
+        }
+        
+        // Find perpendicular point on line
+        function getPerpendicularPoint(px, py, x1, y1, x2, y2) {
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+            const t = ((px - x1) * dx + (py - y1) * dy) / (dx * dx + dy * dy);
+            
+            return {
+                x: x1 + t * dx,
+                y: y1 + t * dy
+            };
+        }
+        
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw line
+            ctx.strokeStyle = '#2196F3';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(lineP1.x, lineP1.y);
+            ctx.lineTo(lineP2.x, lineP2.y);
+            ctx.stroke();
+            
+            // Extend line visually to edges
+            ctx.strokeStyle = '#2196F3';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5, 5]);
+            const dx = lineP2.x - lineP1.x;
+            const dy = lineP2.y - lineP1.y;
+            const len = Math.sqrt(dx * dx + dy * dy);
+            const ux = dx / len;
+            const uy = dy / len;
+            ctx.beginPath();
+            ctx.moveTo(lineP1.x - ux * 200, lineP1.y - uy * 200);
+            ctx.lineTo(lineP2.x + ux * 200, lineP2.y + uy * 200);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // Draw line endpoints
+            ctx.fillStyle = '#2196F3';
+            ctx.beginPath();
+            ctx.arc(lineP1.x, lineP1.y, 8, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(lineP2.x, lineP2.y, 8, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Draw perpendicular line
+            const perpPoint = getPerpendicularPoint(point.x, point.y, lineP1.x, lineP1.y, lineP2.x, lineP2.y);
+            ctx.strokeStyle = '#4CAF50';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(point.x, point.y);
+            ctx.lineTo(perpPoint.x, perpPoint.y);
+            ctx.stroke();
+            
+            // Draw perpendicular indicator (small square)
+            const perpSize = 10;
+            ctx.strokeStyle = '#4CAF50';
+            ctx.lineWidth = 1;
+            const angle = Math.atan2(lineP2.y - lineP1.y, lineP2.x - lineP1.x);
+            ctx.save();
+            ctx.translate(perpPoint.x, perpPoint.y);
+            ctx.rotate(angle);
+            ctx.strokeRect(-perpSize/2, -perpSize/2, perpSize, perpSize);
+            ctx.restore();
+            
+            // Draw perpendicular point
+            ctx.fillStyle = '#4CAF50';
+            ctx.beginPath();
+            ctx.arc(perpPoint.x, perpPoint.y, 5, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Draw point
+            ctx.fillStyle = '#F44336';
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 10, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Calculate and display distance
+            const result = pointToLineDistance(point.x, point.y, lineP1.x, lineP1.y, lineP2.x, lineP2.y);
+            
+            // Update formula display
+            document.getElementById('distanceFormula').innerHTML = 
+                `Formula: d = |Ax + By + C| / √(A² + B²)<br>` +
+                `Where line equation: ${result.A.toFixed(2)}x + ${result.B.toFixed(2)}y + ${result.C.toFixed(2)} = 0`;
+            
+            document.getElementById('distanceValue').innerHTML = 
+                `Distance: <strong>${result.distance.toFixed(2)} pixels</strong>`;
+            
+            // Draw distance label
+            const midX = (point.x + perpPoint.x) / 2;
+            const midY = (point.y + perpPoint.y) / 2;
+            ctx.fillStyle = '#4CAF50';
+            ctx.font = 'bold 16px sans-serif';
+            ctx.fillText(`d = ${result.distance.toFixed(1)}`, midX + 10, midY - 10);
+        }
+        
+        function getMousePos(e) {
+            const rect = canvas.getBoundingClientRect();
+            return {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+        }
+        
+        function isNearPoint(mouseX, mouseY, pointX, pointY) {
+            const dx = mouseX - pointX;
+            const dy = mouseY - pointY;
+            return Math.sqrt(dx * dx + dy * dy) < GRAB_RADIUS;
+        }
+        
+        canvas.addEventListener('mousedown', (e) => {
+            const pos = getMousePos(e);
+            
+            if (isNearPoint(pos.x, pos.y, point.x, point.y)) {
+                dragging = 'point';
+            } else if (isNearPoint(pos.x, pos.y, lineP1.x, lineP1.y)) {
+                dragging = 'lineP1';
+            } else if (isNearPoint(pos.x, pos.y, lineP2.x, lineP2.y)) {
+                dragging = 'lineP2';
+            }
+        });
+        
+        canvas.addEventListener('mousemove', (e) => {
+            const pos = getMousePos(e);
+            
+            if (dragging === 'point') {
+                point.x = pos.x;
+                point.y = pos.y;
+                draw();
+            } else if (dragging === 'lineP1') {
+                lineP1.x = pos.x;
+                lineP1.y = pos.y;
+                draw();
+            } else if (dragging === 'lineP2') {
+                lineP2.x = pos.x;
+                lineP2.y = pos.y;
+                draw();
+            } else {
+                // Update cursor
+                if (isNearPoint(pos.x, pos.y, point.x, point.y) ||
+                    isNearPoint(pos.x, pos.y, lineP1.x, lineP1.y) ||
+                    isNearPoint(pos.x, pos.y, lineP2.x, lineP2.y)) {
+                    canvas.style.cursor = 'pointer';
+                } else {
+                    canvas.style.cursor = 'default';
+                }
+            }
+        });
+        
+        canvas.addEventListener('mouseup', () => {
+            dragging = null;
+        });
+        
+        canvas.addEventListener('mouseleave', () => {
+            dragging = null;
+        });
+        
+        // Initial draw
+        draw();
+    </script>
+</body>
+</html>
