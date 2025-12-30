@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מעקב מניות ישראליות</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f9;
+            color: #333;
+        }
+        header {
+            background-color: #0038b8; /* כחול ישראלי */
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .widget-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>מעקב בורסת תל אביב</h1>
+</header>
+
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  {
+  "symbols": [
+    {
+      "proName": "TASE:TA35",
+      "title": "מדד ת\"א 35"
+    },
+    {
+      "proName": "TASE:TA125",
+      "title": "מדד ת\"א 125"
+    },
+    {
+      "description": "טבע",
+      "proName": "NYSE:TEVA"
+    },
+    {
+      "description": "איי.סי.אל",
+      "proName": "NYSE:ICL"
+    },
+    {
+      "description": "נייס",
+      "proName": "NASDAQ:NICE"
+    },
+    {
+      "description": "בנק לאומי",
+      "proName": "TASE:LUMI"
+    },
+    {
+      "description": "בנק הפועלים",
+      "proName": "TASE:POLI"
+    },
+    {
+      "description": "אלביט מערכות",
+      "proName": "NASDAQ:ESLT"
+    }
+  ],
+  "showSymbolLogo": true,
+  "colorTheme": "light",
+  "isTransparent": false,
+  "displayMode": "adaptive",
+  "locale": "he_IL"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+
+<main>
+    <div class="widget-container" style="height: 600px;">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container" style="height: 100%; width: 100%;">
+          <div class="tradingview-widget-container__widget" style="height: calc(100% - 32px); width: 100%;"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+          {
+          "colorTheme": "light",
+          "dateRange": "12M",
+          "showChart": true,
+          "locale": "he_IL",
+          "width": "100%",
+          "height": "100%",
+          "largeChartUrl": "",
+          "isTransparent": false,
+          "showSymbolLogo": true,
+          "showFloatingTooltip": false,
+          "tabs": [
+            {
+              "title": "מניות ישראליות מובילות",
+              "symbols": [
+                {
+                  "s": "TASE:LUMI",
+                  "d": "בנק לאומי"
+                },
+                {
+                  "s": "TASE:POLI",
+                  "d": "בנק הפועלים"
+                },
+                {
+                  "s": "NYSE:TEVA",
+                  "d": "טבע"
+                },
+                {
+                  "s": "NASDAQ:NICE",
+                  "d": "נייס"
+                },
+                {
+                  "s": "TASE:ICL",
+                  "d": "איי.סי.אל"
+                },
+                {
+                  "s": "TASE:BEZQ",
+                  "d": "בזק"
+                },
+                {
+                  "s": "NASDAQ:ESLT",
+                  "d": "אלביט מערכות"
+                },
+                {
+                  "s": "TASE:DSCT",
+                  "d": "בנק דיסקונט"
+                },
+                {
+                  "s": "TASE:FIBI",
+                  "d": "הבנק הבינלאומי"
+                },
+                {
+                  "s": "TASE:AZRG",
+                  "d": "קבוצת עזריאלי"
+                }
+              ],
+              "originalTitle": "Stocks"
+            }
+          ]
+        }
+          </script>
+        </div>
+        <!-- TradingView Widget END -->
+    </div>
+
+    <div class="widget-container" style="height: 400px;">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container" style="height: 100%; width: 100%;">
+          <div class="tradingview-widget-container__widget" style="height: calc(100% - 32px); width: 100%;"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js" async>
+          {
+          "colorTheme": "light",
+          "dateRange": "12M",
+          "exchange": "TASE",
+          "showChart": true,
+          "locale": "he_IL",
+          "width": "100%",
+          "height": "100%",
+          "largeChartUrl": "",
+          "isTransparent": false,
+          "showSymbolLogo": true,
+          "showFloatingTooltip": false,
+          "plotLineColorGrowing": "rgba(41, 98, 255, 1)",
+          "plotLineColorFalling": "rgba(41, 98, 255, 1)",
+          "gridLineColor": "rgba(240, 243, 250, 0)",
+          "scaleFontColor": "rgba(106, 109, 120, 1)",
+          "belowLineFillColorGrowing": "rgba(41, 98, 255, 0.12)",
+          "belowLineFillColorFalling": "rgba(41, 98, 255, 0.12)",
+          "belowLineFillColorGrowingBottom": "rgba(41, 98, 255, 0)",
+          "belowLineFillColorFallingBottom": "rgba(41, 98, 255, 0)",
+          "symbolActiveColor": "rgba(41, 98, 255, 0.12)"
+        }
+          </script>
+        </div>
+        <!-- TradingView Widget END -->
+    </div>
+</main>
+
+<footer>
+    <p>הנתונים מסופקים על ידי TradingView. המחירים עשויים להיות בעיכוב.</p>
+</footer>
+
+</body>
+</html>
