@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distance from Point to Line</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            cursor: crosshair;
+        }
+        .controls {
+            margin-top: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        .nav {
+            margin-bottom: 20px;
+            align-self: flex-start;
+        }
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        .formula {
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .calculation {
+            font-family: monospace;
+            background: #eee;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <button onclick="window.location.href='index.html'">← Back to Index</button>
+    </div>
+    <h1>Distance from a Point to a Line</h1>
+    <p>Drag the blue points to move the line, and the red point to move the point.</p>
+    
+    <canvas id="canvas" width="600" height="400"></canvas>
+    
+    <div class="controls">
+        <div class="formula">
+            d = |Ax₀ + By₀ + C| / √(A² + B²)
+        </div>
+        <div id="calc-display" class="calculation">
+            <!-- Calculation will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const calcDisplay = document.getElementById('calc-display');
+
+        let points = [
+            { x: 100, y: 300, color: 'blue', label: 'P1', radius: 8 }, // Line point 1
+            { x: 500, y: 100, color: 'blue', label: 'P2', radius: 8 }, // Line point 2
+            { x: 300, y: 100, color: 'red', label: 'P0', radius: 8 }   // The point
+        ];
+
+        let draggingPoint = null;
+
+        canvas.addEventListener('mousedown', e => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            draggingPoint = points.find(p => {
+                const dx = p.x - mouseX;
+                const dy = p.y - mouseY;
+                return Math.sqrt(dx * dx + dy * dy) < p.radius * 2;
+            });
+        });
+
+        window.addEventListener('mousemove', e => {
+            if (draggingPoint) {
+                const rect = canvas.getBoundingClientRect();
+                draggingPoint.x = Math.max(0, Math.min(canvas.width, e.clientX - rect.left));
+                draggingPoint.y = Math.max(0, Math.min(canvas.height, e.clientY - rect.top));
+                draw();
+            }
+        });
+
+        window.addEventListener('mouseup', () => {
+            draggingPoint = null;
+        });
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const p1 = points[0];
+            const p2 = points[1];
+            const p0 = points[2];
+
+            // Draw line (extended to canvas edges)
+            const dx = p2.x - p1.x;
+            const dy = p2.y - p1.y;
+            
+            // Line equation: (y - y1) = m(x - x1) => dy*x - dx*y + (dx*y1 - dy*x1) = 0
+            // Ax + By + C = 0
+            const A = dy;
+            const B = -dx;
+            const C = dx * p1.y - dy * p1.x;
+
+            ctx.strokeStyle = '#aaa';
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            if (Math.abs(dx) > Math.abs(dy)) {
+                ctx.moveTo(0, (-C) / B);
+                ctx.lineTo(canvas.width, (-A * canvas.width - C) / B);
+            } else {
+                ctx.moveTo((-C) / A, 0);
+                ctx.lineTo((-A * canvas.height - C) / A, canvas.height);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Draw line segment between P1 and P2
+            ctx.strokeStyle = 'blue';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+
+            // Calculate perpendicular distance
+            const dist = Math.abs(A * p0.x + B * p0.y + C) / Math.sqrt(A * A + B * B);
+
+            // Find closest point on line to P0
+            // The line is P1 + t(P2 - P1)
+            // The vector P0 - P1 projected onto P2 - P1
+            const t = ((p0.x - p1.x) * dx + (p0.y - p1.y) * dy) / (dx * dx + dy * dy);
+            const closestX = p1.x + t * dx;
+            const closestY = p1.y + t * dy;
+
+            // Draw perpendicular line
+            ctx.strokeStyle = 'green';
+            ctx.setLineDash([2, 2]);
+            ctx.beginPath();
+            ctx.moveTo(p0.x, p0.y);
+            ctx.lineTo(closestX, closestY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Draw points
+            points.forEach(p => {
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = 'black';
+                ctx.fillText(p.label, p.x + 10, p.y - 10);
+            });
+
+            // Update calculation display
+            calcDisplay.innerHTML = `
+                Line Equation: ${A.toFixed(1)}x + ${B.toFixed(1)}y + ${C.toFixed(1)} = 0<br>
+                Point P₀: (${p0.x.toFixed(1)}, ${p0.y.toFixed(1)})<br>
+                <br>
+                d = |(${A.toFixed(1)})(${p0.x.toFixed(1)}) + (${B.toFixed(1)})(${p0.y.toFixed(1)}) + (${C.toFixed(1)})| / √(${A.toFixed(1)}² + ${B.toFixed(1)}²)<br>
+                d = |${(A * p0.x + B * p0.y + C).toFixed(1)}| / ${Math.sqrt(A * A + B * B).toFixed(1)}<br>
+                <strong>d = ${dist.toFixed(2)} pixels</strong>
+            `;
+        }
+
+        draw();
+    </script>
+</body>
+</html>
