@@ -5,18 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Parabola Visualization</title>
     <style>
+        :root {
+            --bg-color: #f0f0f0;
+            --canvas-bg: white;
+            --canvas-border: #ccc;
+            --text-color: #333;
+            --axis-color: #ddd;
+            --parabola-color: blue;
+            --button-bg: #fff;
+            --button-text: #333;
+            --button-border: #ccc;
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #1a1a2e;
+            --canvas-bg: #16213e;
+            --canvas-border: #0f3460;
+            --text-color: #e0e0e0;
+            --axis-color: #4a4a6a;
+            --parabola-color: #00d4ff;
+            --button-bg: #0f3460;
+            --button-text: #e0e0e0;
+            --button-border: #1a1a2e;
+        }
+        
         body {
             font-family: sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            background-color: #f0f0f0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
         }
         canvas {
-            background-color: white;
-            border: 1px solid #ccc;
+            background-color: var(--canvas-bg);
+            border: 1px solid var(--canvas-border);
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background-color 0.3s, border-color 0.3s;
         }
         .controls {
             margin-top: 20px;
@@ -28,16 +55,32 @@
         .nav {
             margin-bottom: 20px;
             align-self: flex-start;
+            display: flex;
+            gap: 10px;
         }
         button {
             padding: 8px 16px;
             cursor: pointer;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: 1px solid var(--button-border);
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
     </style>
 </head>
 <body>
     <div class="nav">
         <button onclick="window.location.href='index.html'">← Back to Index</button>
+        <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
     </div>
     <h1>Interactive Parabola: y = ax² + bx + c</h1>
     <canvas id="canvas" width="600" height="400"></canvas>
@@ -64,6 +107,18 @@
         const aVal = document.getElementById('aVal');
         const bVal = document.getElementById('bVal');
         const cVal = document.getElementById('cVal');
+        const themeToggle = document.getElementById('themeToggle');
+
+        // Cache theme colors to avoid repeated getComputedStyle calls
+        let cachedColors = null;
+
+        function updateCachedColors() {
+            const style = getComputedStyle(document.documentElement);
+            cachedColors = {
+                axis: style.getPropertyValue('--axis-color').trim(),
+                parabola: style.getPropertyValue('--parabola-color').trim()
+            };
+        }
 
         function draw() {
             const a = parseFloat(aInput.value);
@@ -77,7 +132,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // Draw axes
-            ctx.strokeStyle = '#ddd';
+            ctx.strokeStyle = cachedColors.axis;
             ctx.beginPath();
             ctx.moveTo(0, canvas.height / 2);
             ctx.lineTo(canvas.width, canvas.height / 2);
@@ -86,7 +141,7 @@
             ctx.stroke();
 
             // Draw parabola
-            ctx.strokeStyle = 'blue';
+            ctx.strokeStyle = cachedColors.parabola;
             ctx.lineWidth = 2;
             ctx.beginPath();
 
@@ -108,11 +163,40 @@
             ctx.stroke();
         }
 
+        function applyTheme(isDark) {
+            const html = document.documentElement;
+            if (isDark) {
+                html.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '☀️ Light Mode';
+            } else {
+                html.removeAttribute('data-theme');
+                themeToggle.textContent = '🌙 Dark Mode';
+            }
+            updateCachedColors();
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const newTheme = !isDark;
+            
+            localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+            applyTheme(newTheme);
+            draw();
+        }
+
+        // Initialize theme from localStorage or default to light
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const isDark = savedTheme === 'dark';
+            applyTheme(isDark);
+            draw();
+        }
+
         [aInput, bInput, cInput].forEach(input => {
             input.addEventListener('input', draw);
         });
 
-        draw();
+        initTheme();
     </script>
 </body>
 </html>
