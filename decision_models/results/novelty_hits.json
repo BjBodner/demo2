@@ -79,5 +79,260 @@
    "1611.05438v1",
    "An Efficient Framework for Floor-plan Prediction of Dynamic Runtime Reconfigurable Systems"
   ]
+ ],
+ "D calibrated decision DAGs with active labeling": [
+  [
+   "2026-10-18",
+   "2610.25553v1",
+   "Narrow Decision Models: A System-1 Architecture for Calibrated, Typed Decisions"
+  ],
+  [
+   "2026-10-05",
+   "2610.06744v1",
+   "ufakzeka-karar: An Open Turkish Typed-Decision Model with Order-Invariant Option Scoring"
+  ],
+  [
+   "2026-10-01",
+   "2610.02293v1",
+   "HakemBench: A Turkish Benchmark of Typed Decisions"
+  ],
+  [
+   "2024-11-27",
+   "2411.18060v1",
+   "ORIS: Online Active Learning Using Reinforcement Learning-based Inclusive Sampling for Robust Streaming Analytics System"
+  ],
+  [
+   "2023-03-17",
+   "2303.10022v1",
+   "Hierarchical-Hyperplane Kernels for Actively Learning Gaussian Process Models of Nonstationary Systems"
+  ],
+  [
+   "2023-03-14",
+   "2304.00006v1",
+   "Bi-directional personalization reinforcement learning-based architecture with active learning using a multi-model data service for the travel nursing industry"
+  ],
+  [
+   "2022-06-23",
+   "2206.11616v1",
+   "Improving decision-making via risk-based active learning: Probabilistic discriminative classifiers"
+  ],
+  [
+   "2020-01-20",
+   "2001.10337v2",
+   "Early Forecasting of Text Classification Accuracy and F-Measure with Active Learning"
+  ]
+ ],
+ "E IRT routing between fast and slow models": [
+  [
+   "2025-10-04",
+   "2510.05162v2",
+   "Artificial-Intelligence Grading Assistance for Handwritten Components of a Calculus Exam"
+  ],
+  [
+   "2025-10-01",
+   "2510.00844v1",
+   "Learning Compact Representations of LLM Abilities via Item Response Theory"
+  ],
+  [
+   "2025-06-01",
+   "2506.01048v2",
+   "IRT-Router: Effective and Interpretable Multi-LLM Routing via Item Response Theory"
+  ]
+ ],
+ "F calibration collapse under recursive distillation": [
+  [
+   "2026-10-21",
+   "2610.29961v1",
+   "Commit or Abstain? System One Decision Models, LLMs, and Missing Legal Authority"
+  ],
+  [
+   "2026-10-06",
+   "2610.09188v1",
+   "From Probabilities to Decisions: Search and Multi-Teacher Distillation with Jev"
+  ],
+  [
+   "2025-08-02",
+   "2508.01139v3",
+   "Dataset Condensation with Color Compensation"
+  ]
+ ],
+ "G probability fingerprints for hosted decision API drift": [
+  [
+   "2022-07-27",
+   "2207.13287v1",
+   "Detecting Concept Drift in the Presence of Sparsity -- A Case Study of Automated Change Risk Assessment System"
+  ],
+  [
+   "2021-08-14",
+   "2108.06442v1",
+   "The Geometric Structure of Externally Actuated Planar Locomoting Systems in Ambient Media"
+  ],
+  [
+   "2020-05-21",
+   "2005.10667v2",
+   "Vanishing diffusion limits and long time behaviour of a class of forced active scalar equations"
+  ],
+  [
+   "2020-05-19",
+   "2005.09527v1",
+   "Evaluating the leeway coefficient for different ocean drifters using operational models"
+  ],
+  [
+   "2018-01-24",
+   "1801.08182v1",
+   "Detector Development for a Sterile Neutrino Search with the KATRIN Experiment"
+  ],
+  [
+   "2012-07-04",
+   "1207.0907v1",
+   "New Results on Sampled-Data Feedback Stabilization for Autonomous Nonlinear Systems"
+  ]
+ ],
+ "H unlearning teacher-inherited errors": [],
+ "I calibration-preserving low-rank adaptation with OOD coverage": [
+  [
+   "2026-11-15",
+   "2611.20191v1",
+   "Do We Still Need Fine-Tuned Classifiers? Swapping Typed Decision Models into 24 ACL-Venue Papers"
+  ],
+  [
+   "2026-11-04",
+   "2611.07063v1",
+   "SD-LoRA: Training-Time Structural Distillation into LoRA for Few-Shot Vision-Language Adaptation"
+  ],
+  [
+   "2026-11-02",
+   "2611.03755v1",
+   "Honest Small Decision Models for Finance: Scale, Specialization Collapse, and Mixed-Corpus Remediation"
+  ],
+  [
+   "2026-10-26",
+   "2610.35457v1",
+   "Prior Predictive Matching for Bayesian LoRA"
+  ],
+  [
+   "2026-10-23",
+   "2610.32478v1",
+   "PathJev: Decision-Native Vision-Language Modelling for Histopathology"
+  ],
+  [
+   "2026-10-19",
+   "2610.26325v1",
+   "Typed Decision Models under Prevalence Shift: Decision Training, Calibration, and Implicit Priors"
+  ],
+  [
+   "2026-10-18",
+   "2610.25456v1",
+   "System X: An LLM Decision Model That Replies from Its Own KV Cache"
+  ],
+  [
+   "2026-10-17",
+   "2611.18655v1",
+   "Beveridge: Open Weight System One Decision Models with Calibrated Probabilities"
+  ],
+  [
+   "2026-08-02",
+   "2608.01530v2",
+   "ST-LoRA: Single Trajectory LoRA Ensemble for Uncertainty Aware Agricultural Segmentation"
+  ],
+  [
+   "2026-07-28",
+   "2607.26052v2",
+   "Spend Experts Where You Are Unsure: Confidence-Adaptive Routing for Mixture-of-Experts LoRA"
+  ],
+  [
+   "2026-02-17",
+   "2602.15785v1",
+   "This human study did not involve human subjects: Validating LLM simulations as behavioral evidence"
+  ],
+  [
+   "2026-01-28",
+   "2601.21003v4",
+   "Bayesian-LoRA: Probabilistic Low-Rank Adaptation of Large Language Models"
+  ],
+  [
+   "2023-09-29",
+   "2310.00035v2",
+   "LoRA ensembles for large language model fine-tuning"
+  ]
+ ],
+ "J bandit-budgeted textual-gradient criteria optimization": [
+  [
+   "2026-11-15",
+   "2611.20191v1",
+   "Do We Still Need Fine-Tuned Classifiers? Swapping Typed Decision Models into 24 ACL-Venue Papers"
+  ],
+  [
+   "2026-08-07",
+   "2608.06714v2",
+   "The Optimizer Is the Agent: Reasoning-Driven Search across Prompts, Programs, and ML Workflows"
+  ],
+  [
+   "2025-08-29",
+   "2509.00189v1",
+   "HiVA: Self-organized Hierarchical Variable Agent via Goal-driven Semantic-Topological Evolution"
+  ],
+  [
+   "2022-01-29",
+   "2201.12683v2",
+   "A Priori Denoising Strategies for Sparse Identification of Nonlinear Dynamical Systems: A Comparative Study"
+  ],
+  [
+   "2020-09-07",
+   "2009.02867v1",
+   "Kernel Center Adaptation in the Reproducing Kernel Hilbert Space Embedding Method"
+  ],
+  [
+   "2019-12-31",
+   "1912.13258v1",
+   "Automated Testing for Deep Learning Systems with Differential Behavior Criteria"
+  ],
+  [
+   "2012-06-09",
+   "1206.1953v1",
+   "Improvement of Loadability in Distribution System Using Genetic Algorithm"
+  ],
+  [
+   "2007-06-13",
+   "0706.1914v1",
+   "Approche variationnelle pour le calcul bay\u00e9sien dans les probl\u00e8mes inverses en imagerie"
+  ]
+ ],
+ "K PMI option-prior correction": [
+  [
+   "2026-10-23",
+   "2610.32318v1",
+   "System One models Are Not Better Rerankers"
+  ],
+  [
+   "2026-10-06",
+   "2610.07953v1",
+   "Benchmarking System One Models in Online Moderation"
+  ],
+  [
+   "2026-10-01",
+   "2610.02486v1",
+   "From Retrieval to Typed Decisions: Calibrated System One Models from Biomedical Sentence Encoders"
+  ],
+  [
+   "2026-03-09",
+   "2603.08459v2",
+   "Data-Driven Priors for Uncertainty-Aware Risk Prediction of Clinical Deterioration using Multimodal Data"
+  ],
+  [
+   "2023-02-17",
+   "2302.08882v2",
+   "Discriminating mixed qubit states with collective measurements"
+  ],
+  [
+   "2021-04-16",
+   "2104.08315v9",
+   "Surface Form Competition: Why the Highest Probability Answer Isn't Always Right"
+  ],
+  [
+   "2001-10-28",
+   "0110585v1",
+   "The core structure of presolar graphite onions"
+  ]
  ]
 }
