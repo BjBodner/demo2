@@ -1,0 +1,13 @@
+{
+ "A grammar-compiled masks for coherent typed decisions": ["all:\"decision model\" AND all:coherence AND all:negation", "all:\"attention mask\" AND all:\"logical consistency\" AND all:probabilities", "all:\"System One\" AND all:coherent"],
+ "B nonsense option names / definition grounding": ["all:\"option name\" AND all:definition AND all:decision", "all:\"label names\" AND all:\"random labels\" AND all:classification AND all:LLM", "all:\"option-channel\""],
+ "C layer-wise decision readout / adaptive depth": ["all:\"logit lens\" AND all:\"early exit\" AND all:classification", "all:\"System One\" AND all:\"adaptive computation\"", "all:\"decision model\" AND all:layer AND all:\"early exit\""],
+ "D calibrated decision DAGs with active labeling": ["all:\"decision model\" AND all:\"active learning\" AND all:calibration", "all:\"typed decision\" AND all:composition", "all:\"System One\" AND all:\"active learning\""],
+ "E IRT routing between fast and slow models": ["all:\"item response theory\" AND all:routing AND all:LLM", "all:\"item response theory\" AND all:\"System One\"", "all:\"item response theory\" AND all:router"],
+ "F calibration collapse under recursive distillation": ["all:\"model collapse\" AND all:calibration AND all:distillation", "all:\"recursive\" AND all:distillation AND all:\"expected calibration error\"", "all:\"System One\" AND all:distillation AND all:calibration"],
+ "G probability fingerprints for hosted decision API drift": ["all:\"model fingerprint\" AND all:API AND all:drift AND all:LLM", "all:\"conformal\" AND all:\"model update\" AND all:\"API\" AND all:LLM", "all:\"System One\" AND all:drift"],
+ "H unlearning teacher-inherited errors": ["all:unlearning AND all:distillation AND all:\"teacher errors\"", "all:\"correlated errors\" AND all:distillation AND all:judge", "all:\"System One\" AND all:unlearning"],
+ "I calibration-preserving low-rank adaptation with OOD coverage": ["all:LoRA AND all:calibration AND all:\"out-of-distribution\"", "all:\"calibration-preserving\" AND all:fine-tuning", "all:\"decision model\" AND all:LoRA AND all:calibration"],
+ "J bandit-budgeted textual-gradient criteria optimization": ["all:\"textual gradients\" AND all:bandit", "all:\"System One\" AND all:criteria AND all:optimization", "all:\"prompt optimization\" AND all:\"decision model\""],
+ "K PMI option-prior correction": ["all:\"pointwise mutual information\" AND all:\"multiple choice\" AND all:calibration", "all:\"domain conditional\" AND all:PMI AND all:\"zero-shot\"", "all:\"System One\" AND all:prior"]
+}
