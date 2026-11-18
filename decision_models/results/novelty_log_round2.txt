@@ -23,3 +23,67 @@
 ## N4 label-shift correction of decision probabilities
    2026-10-25 2610.34329v1 SHIFT-JEV: Certified Abstention and Gain-Gated Continual Adaptation for LLM-Based Decision Models under Distribution Shift
    2026-10-19 2610.26325v1 Typed Decision Models under Prevalence Shift: Decision Training, Calibration, and Implicit Priors
+
+## N5 label-efficient conformal calibration set selection
+   2026-06-07 2606.08654v1 Operator learning for the 2D incompressible Navier-Stokes equations: a conformal prediction approach in the data-scarce regime
+   2025-02-07 2502.04807v2 Robust Conformal Outlier Detection under Contaminated Reference Data
+   2024-09-20 2409.13585v1 Neurosymbolic Conformal Classification
+   2013-10-31 1311.0007v2 Conducting fixed points for inhomogeneous quantum wires: a conformally invariant boundary theory
+   2013-09-19 1309.5048v1 Performance Evaluation of Block Diagonal Preconditioners for Divergence-Conforming B-Spline Discretization of Stokes Equations
+   2011-08-29 1108.5763v2 Rolling tachyons for separated brane-antibrane systems
+   2009-08-23 0908.3290v1 Hidden symmetries of integrable conformal mechanical systems
+   2007-07-30 0707.4367v3 Planar quark scattering at strong coupling and universality
+
+## N6 bandit red teaming of typed guardrails
+   2026-10-28 2610.38895v1 FlipJev: Fast Black-Box Red Teaming Finds Universal Adversarial Suffixes for Typed Decision Models
+   2026-09-25 2609.31142v2 JevAdvBench: A Benchmark and Black-Box Attacks for Reinforcement Learning for Calibrated Decisions Models
+
+## N7 watermark against distillation of decision APIs
+   2023-02-06 2302.03162v3 Protecting Language Generation Models via Invisible Watermarking
+
+## N8 membership inference on decision models
+   2022-09-22 2209.11020v1 Privacy Attacks Against Biometric Models with Fewer Samples: Incorporating the Output of Multiple Models
+
+## N9 active distillation from decision API
+   2026-10-06 2610.09188v1 From Probabilities to Decisions: Search and Multi-Teacher Distillation with Jev
+   2026-10-06 2610.08775v1 Agent in a Bottle: Can LLM Agents Turn Their Capabilities Into Cheap, Scalable Artifacts?
+
+## N10 sequential evidence accumulation early decision
+   2026-05-07 2605.06987v1 Response Time Enhances Alignment with Heterogeneous Preferences
+   2024-02-16 2402.10699v2 Thinker-DDM: Modeling Deliberation for Machine Translation with a Drift-Diffusion Process
+
+## N11 option definition length bias
+   2019-05-24 1905.09975v2 Computing Long Timescale Biomolecular Dynamics using Quasi-Stationary Distribution Kinetic Monte Carlo (QSD-KMC)
+
+## N12 subgroup calibration fairness for decision models
+   2026-11-03 2611.04510v1 Fast, Cheap, and Fair? Evaluating Decision Models
+   2023-11-21 2311.12435v4 Fair Enough? A map of the current limitations of the requirements to have fair algorithms
+   2022-06-09 2206.04789v1 Comprehensive Fair Meta-learned Recommender System
+   2021-10-06 2110.03001v1 Predictability and Fairness in Load Aggregation and Operations of Virtual Power Plants
+   2020-08-01 2008.00207v1 Online Task Scheduling for Fog Computing with Multi-Resource Fairness
+   2019-05-22 1905.08992v1 Opportunistic Temporal Fair Mode Selection and User Scheduling for Full-duplex Systems
+   2006-09-12 0609100v1 Fairness State with Plastic Preferences
+
+## N13 PMI-filtered synthetic decision data
+   2026-10-10 2610.37676v1 Scoring Explanations Without Reading Them: Structural Shortcuts in Automated-Interpretability Evaluation Data
+   2026-08-21 2608.21537v1 Counterfactual, Per-Decision Bias Auditing for Automated Hiring: Localizing and Explaining Disparate Impact in Applicant Tracking Systems
+   2022-12-17 2212.08797v2 Semi-randomized block Kaczmarz methods with simple random sampling for large-scale linear systems
+   2022-07-27 2207.13287v1 Detecting Concept Drift in the Presence of Sparsity -- A Case Study of Automated Change Risk Assessment System
+   2020-11-03 2011.01460v1 Training Wake Word Detection with Synthesized Speech Data on Confusion Words
+
+## N14 incremental decisions over edited agent states
+   2026-10-23 2610.32955v4 Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox
+   2026-10-13 2610.18615v1 VideoJev: System One Model for Video Understanding and Interaction
+   2026-10-05 2610.07327v1 SharedKV-BT: Node-Local Typed Decisions for Behavior-Tree Agents
+   2026-10-01 2610.02267v1 Fast Models, Slow Evidence: A Paired and Self-Audited Evaluation of System-1 Decision Models for LLM Agent Harnesses
+   2026-09-28 2609.34862v1 JEV as a Judge for Agent Trace Security: An Empirical Comparison with Generative LLM Judges
+   2026-09-28 2609.34227v1 When Does Selection Replace Extraction? A Pre-Registered Test of Agent Memory with a Typed Decision Model
+   2026-09-24 2609.30186v1 Jev-Mobile: Jev as an Executor for Mobile GUI Agents
+
+## N15 IRT efficient evaluation of decision models
+   2026-11-04 2611.06977v1 BlockLock: Reproducible LLM Inference with Fixed Batch Geometry
+   2026-10-06 2610.09000v1 How Fragile Is On-Device Language Model Safety? Localizing Safety-Critical Parameters for Sparse Fault Analysis
+   2026-06-22 2606.22826v2 MINCE: Shrinking LLM Evaluation Datasets via Few-Model Monte Carlo Calibration
+   2025-12-22 2601.03272v1 Less is more: Not all samples are effective for evaluation
+   2024-02-22 2402.14992v2 tinyBenchmarks: evaluating LLMs with fewer examples
+   2020-09-16 2009.07506v2 The 1st Tiny Object Detection Challenge:Methods and Results

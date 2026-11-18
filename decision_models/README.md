@@ -1,5 +1,9 @@
 # New research directions for System One decision models, found with Alien
 
+> **See also [RANKED.md](RANKED.md):** 26 options (these 11 plus 15 more), ranked by
+> whether they run on a laptop and how well-defined their metric is, with a measured
+> CPU baseline.
+
 **Question.** What research directions are coherent but unlikely to be pursued for
 the new class of *System One / decision models*? These include TypeSafe's Jev,
 Jeva, Microsoft‑Decision‑1, gemini‑decision‑1, Prism‑1 and their open relatives.

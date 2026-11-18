@@ -1,0 +1,13 @@
+{
+ "model": "Qwen/Qwen3-0.6B",
+ "n": 200,
+ "k": 8,
+ "threads": 4,
+ "accuracy": 0.785,
+ "ece": 0.1379919037222862,
+ "brier": 0.34497121284137255,
+ "mean_conf": 0.9159625172615051,
+ "order_flip_rate": 0.285,
+ "ms_per_decision_p50": 369.6263964999815,
+ "lora_step_s_batch8": 5.231882452000008
+}
