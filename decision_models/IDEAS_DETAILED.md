@@ -112,42 +112,14 @@ an oracle.
 **Risk.** Weighted conformal can inflate set sizes. Report both coverage and size.
 
 ## 3. N1: "Hub" options in large option sets
-**Problem.**
-- Decision models that encode options independently (Jeva, retrieval-as-choice, tool
-  selection with hundreds to thousands of options) score options by vector
-  similarity.
-- High-dimensional embeddings have *hubs*: points close to everything.
-- A hub option wins far more than it should, and nobody has measured this for
-  decision models. It showed up in this very project when mapping atoms with BGE.
+**Now worked out in full, with a pilot that has run: see
+[OPTION3_HUB_OPTIONS.md](OPTION3_HUB_OPTIONS.md).**
 
-**Approach.**
-- Measure how concentrated the predictions are: k-occurrence skewness, i.e. how often
-  each option is the argmax compared with its true frequency.
-- Test fixes that need no training: CSLS-style hubness reduction, centring/whitening
-  option embeddings, and subtracting a per-option prior estimated on content-free
-  states.
-- Compare at K = 8, 32, 150 (all CLINC150 intents) and larger tool sets.
-
-**Contributions.**
-1. Hubness as a named, measured failure mode of embedding-scored decision models,
-   with a metric.
-2. Simple fixes that need no training and cost almost nothing at inference.
-3. A scaling law: how hubness and its accuracy cost grow with the number of options.
-
-**Expected results.**
-- *Accuracy and skewness against K*, before and after each fix.
-- *Hypothesis:* hubness is mild at K=8 and large at K≥150. A handful of options take
-  a disproportionate share of wrong predictions.
-- CSLS or centring recovers several accuracy points at K=150 and improves
-  out-of-scope detection, because hubs also swallow out-of-scope queries.
-
-**If it fails.** If modern embedding models show little hubness, you have shown that
-the Jeva-style design is safe at scale. That is a useful negative.
-
-**Baselines.** Raw cosine scoring; a cross-encoder or letter-logit readout at small K
-as an accuracy ceiling.
-
-**Risk.** Small effects at small K. Make sure to include a large-K benchmark.
+Pilot on CLINC150 with BGE-large, 150 options, on CPU:
+- Raw cosine reaches 71.9% accuracy. The busiest option is picked 89 times against a
+  true count of 30.
+- Training-free corrections that use only unlabelled traffic reach 76.0%.
+- The gain grows with the number of options: +1.6 points at 8 options, +4.1 at 150.
 
 ## 4. N10: Anytime decisions by sequential evidence accumulation
 **Problem.**

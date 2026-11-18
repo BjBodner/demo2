@@ -1,0 +1,179 @@
+{
+ "model": "BAAI/bge-large-en-v1.5",
+ "n_options": 150,
+ "n_test": 4500,
+ "n_oos": 1000,
+ "pool": 5000,
+ "full_K": {
+  "raw": {
+   "accuracy": 0.7186666666666667,
+   "skew_N1": 0.5994821010482652,
+   "max_N1": 89,
+   "top10_share": 0.142,
+   "err_top10_share": 0.28751974723538704,
+   "oos_top10_share": 0.156,
+   "oos_auroc": 0.9105255555555556,
+   "hub_names": [
+    "what_is_your_name",
+    "restaurant_reservation",
+    "next_holiday",
+    "bill_balance",
+    "flight_status"
+   ]
+  },
+  "center": {
+   "accuracy": 0.7408888888888889,
+   "skew_N1": 0.23547698005437137,
+   "max_N1": 70,
+   "top10_share": 0.12911111111111112,
+   "err_top10_share": 0.25728987993138935,
+   "oos_top10_share": 0.092,
+   "oos_auroc": 0.9210211111111111,
+   "hub_names": [
+    "shopping_list",
+    "what_is_your_name",
+    "change_volume",
+    "next_holiday",
+    "restaurant_reservation"
+   ]
+  },
+  "prior": {
+   "accuracy": 0.7344444444444445,
+   "skew_N1": 0.12414219156903906,
+   "max_N1": 69,
+   "top10_share": 0.12911111111111112,
+   "err_top10_share": 0.24686192468619247,
+   "oos_top10_share": 0.103,
+   "oos_auroc": 0.9136786666666666,
+   "hub_names": [
+    "shopping_list",
+    "change_volume",
+    "what_is_your_name",
+    "next_holiday",
+    "timezone"
+   ]
+  },
+  "csls": {
+   "accuracy": 0.7455555555555555,
+   "skew_N1": 1.1777826128645206,
+   "max_N1": 83,
+   "top10_share": 0.1328888888888889,
+   "err_top10_share": 0.31004366812227074,
+   "oos_top10_share": 0.131,
+   "oos_auroc": 0.8977073333333333,
+   "hub_names": [
+    "translate",
+    "last_maintenance",
+    "restaurant_reservation",
+    "what_is_your_name",
+    "calendar_update"
+   ]
+  },
+  "invsoft": {
+   "accuracy": 0.7604444444444445,
+   "skew_N1": 0.19368275003144714,
+   "max_N1": 58,
+   "top10_share": 0.10955555555555556,
+   "err_top10_share": 0.21428571428571427,
+   "oos_top10_share": 0.122,
+   "oos_auroc": 0.9073795555555556,
+   "hub_names": [
+    "international_visa",
+    "what_is_your_name",
+    "last_maintenance",
+    "make_call",
+    "spending_history"
+   ]
+  }
+ },
+ "by_K": {
+  "8": {
+   "raw": {
+    "accuracy": 0.9429166666666667,
+    "skew_N1": -0.2124075257806314
+   },
+   "center": {
+    "accuracy": 0.955138888888889,
+    "skew_N1": -0.22256834606613207
+   },
+   "prior": {
+    "accuracy": 0.9545833333333336,
+    "skew_N1": -0.22235924968581575
+   },
+   "csls": {
+    "accuracy": 0.9513888888888891,
+    "skew_N1": 0.3559838477318069
+   },
+   "invsoft": {
+    "accuracy": 0.9587500000000001,
+    "skew_N1": 0.29908930808492556
+   }
+  },
+  "32": {
+   "raw": {
+    "accuracy": 0.8681597222222222,
+    "skew_N1": -0.08759197947288924
+   },
+   "center": {
+    "accuracy": 0.8830555555555556,
+    "skew_N1": -0.3890408461334546
+   },
+   "prior": {
+    "accuracy": 0.8801041666666666,
+    "skew_N1": -0.3803634112834243
+   },
+   "csls": {
+    "accuracy": 0.8907638888888887,
+    "skew_N1": 0.6413210835534621
+   },
+   "invsoft": {
+    "accuracy": 0.8989583333333334,
+    "skew_N1": 0.08155951404903745
+   }
+  },
+  "75": {
+   "raw": {
+    "accuracy": 0.7951703703703704,
+    "skew_N1": 0.4661560827503091
+   },
+   "center": {
+    "accuracy": 0.8133185185185184,
+    "skew_N1": 0.055005127800155394
+   },
+   "prior": {
+    "accuracy": 0.8062666666666668,
+    "skew_N1": -0.009085720104270384
+   },
+   "csls": {
+    "accuracy": 0.820888888888889,
+    "skew_N1": 1.0361525108297234
+   },
+   "invsoft": {
+    "accuracy": 0.8321925925925927,
+    "skew_N1": 0.10111873582526322
+   }
+  },
+  "150": {
+   "raw": {
+    "accuracy": 0.7186666666666667,
+    "skew_N1": 0.5994821010482652
+   },
+   "center": {
+    "accuracy": 0.7408888888888889,
+    "skew_N1": 0.23547698005437137
+   },
+   "prior": {
+    "accuracy": 0.7344444444444445,
+    "skew_N1": 0.12414219156903906
+   },
+   "csls": {
+    "accuracy": 0.7455555555555555,
+    "skew_N1": 1.1777826128645206
+   },
+   "invsoft": {
+    "accuracy": 0.7604444444444445,
+    "skew_N1": 0.19368275003144714
+   }
+  }
+ }
+}
