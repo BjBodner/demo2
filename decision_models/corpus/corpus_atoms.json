@@ -1,0 +1,506 @@
+{
+ "atoms": [
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Scoring instead of generating. Treating a closed-set decision as scoring the given options, rather than generating an answer, removes autoregressive decoding. Latency and cost then scale with input tokens only: zero output tokens and no parse failures."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Option-letter logits as a free decision model. An instruction-tuned LM already holds a usable decision distribution: read the option-letter (A/B/C...) logits at the last position and softmax over them. With no training, this nearly matches a purpose-built model (79.6 vs 80.1)."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Initialise the decision head from the LM head. Starting the head from the LM-head rows for the option tokens, then fine-tuning with LoRA, keeps the pretrained answer prior. The calibration objective only has to sharpen it, which explains why small adapters suffice."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Order invariance by construction. Encode each option in its own attention block at *shared* position IDs, masked from the other options. The per-option score then depends only on context and that option, so a softmax across blocks is permutation-invariant and immune to irrelevant options, with no augmentation needed."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Independence axioms define what to measure. Stating decision-read requirements as axioms (position independence, rival independence) gives a diagnostic that ordinary accuracy cannot. Count only answers that survive reordering (\"robust accuracy\"); this separated models that plain accuracy ranked within 1 point."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Many questions over one encoded input. Encode one input once and score many independent questions against it (up to 1,000 per call). The encoding cost is amortised across all of them, which suits multi-attribute grading and policy checks."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Rubric grading as an ordinal distribution. Return per-level probabilities over an ordered rubric, plus their expectation as a continuous score. This keeps uncertainty that a single grade discards. Rounding the expectation can pick a level the model gave near-zero probability, so take the argmax or a cost-aware choice instead."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Brier-penalised accuracy. Defining a score as 50 \u00d7 (1 + accuracy \u2212 Brier) charges confident errors more than hedged ones. Models with lower raw accuracy but better probabilities can tie or win (Brier 0.15 vs 0.27 on AA-Paperclip)."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Calibrate against the noise floor. Measure calibration error relative to the finite-sample noise floor of a perfectly calibrated predictor, not against zero. Small benchmark ECE gaps then don't look significant when they are only sampling noise."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Report accuracy across paraphrases. Give accuracy as a median and range over paraphrased prompts, plus an explicit symmetry or perturbation test. This exposes wording sensitivity that a single prompt hides: a 1.3% flip rate under 8 perturbations [V], and TypedBench's wording-sensitive hosted model."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Evaluate realised cost, not just calibration. Score decisions by realised cost under asymmetric cost matrices. This shows that a model's probabilities can give worse outcomes than its top-1 answer when it is systematically underconfident. Calibration quality is necessary but not sufficient for thresholding."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Coherence gives label-free calibration bounds. Asking a question and its negation, or each exclusive label separately, should yield probabilities that sum to 1. Measured deviations (+0.064 average; 1.14 for a 3-way set) bound miscalibration without ground-truth labels."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Selective prediction with a reasoning fallback. Route the least-confident fraction of decisions to a slow reasoner. Deferral gain then tracks the fast model's AUROC (rank correlation 0.87) and beats random deferral. The fast model's ranking quality, not just its calibration, determines escalation value."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Gate escalation on behaviour signals. In closed loops, trigger slow reasoning on trajectory events (stuck, looping, blocked), not only per-step confidence. The reasoner's latency budget must match the control rate: about 1,300 reasoning tokens per decision vs a 0.5 s decision cadence makes 30% deferral infeasible."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "A cheap specialist in front of the decision model. Put a cheap task-trained classifier first and escalate only uncertain cases to the general decision model. This matched the decision model's accuracy at 0.43x its cost; with in-domain labels, fine-tuned encoders (DeBERTa-v3-large) still beat zero-shot decision models."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Paired probes separate reading from acting. Pair each action question with independent factual probes about the same state. This shows whether errors come from perception or from decision policy: most errors happen after a correct read, and the share grows with model accuracy."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Static scores do not transfer to closed loops. Evaluate single-step decisions and closed-loop agent episodes on the same models. Models that match LLMs on static, well-calibrated decisions can collapse in interactive multi-step settings (\u22643.1% vs 32.9% success)."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Byte-identical paired comparisons. Feed byte-identical inputs to each system, use paired tests, and add matched robustness variants (7,283 base + 6,640 variants). This removes prompt-formatting confounds when comparing hosted and open decision models."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Audit for benchmark exposure. Re-test a model's leads on rater-labelled or held-out splits. A checkpoint's largest lead traced to training-data exposure and vanished on rater-labelled data."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Keep deterministic logic out of the model. Leave arithmetic, dates, permissions and explicit policy in code, and use the decision model only for the fuzzy mapping from language to a bounded label. This shrinks the error surface and makes thresholds auditable."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Uncertainty-aware deployment loop. Start with one reversible decision, label real cases, expose uncertainty, and only then let the score trigger actions (act / defer / review). This turns calibrated probabilities into a staged automation policy."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Small open bases are enough. Post-training an off-the-shelf 2B to 9B open base (Qwen3.5-9B, 2B, 9B flash variants) for single-pass option scoring is enough for competitive decision quality at sub-100 ms. Decision quality relies on pretrained knowledge more than scale."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Size tiers for precision and latency. Shipping a precision model (27B) and a latency model (9B) under one API contract lets callers trade accuracy for tail latency per decision type. Out-of-scope behaviour of the small tier must be tested separately."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Typed multi-field decisions in one call. Defining the API as one state plus typed questions (predicate \u2192 P(true), choice \u2192 per-option distribution, score \u2192 rubric distribution) answers several decision types at once. Responses are schema-valid by construction, with no free-text parsing."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Gateway telemetry vs vendor latency. Measured gateway p50 (0.28 s; 190 to 270 ms external) vs a vendor in-region p50 (85 ms) shows that decision-model latency claims need the measurement point stated. Network and gateway overhead can dominate when inference itself is sub-100 ms."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Cost per task, not per token. Because these models bill input only, comparing cost per 1M *tasks* (prompt length \u00d7 questions \u00d7 price) can reverse token-price rankings. A $0.10/M model cost $345 per 1M tasks against a $135 median. [5, 7] ---"
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Option-set softmax as a type system. Normalising a classifier's output only over the option set declared at runtime (embedding the options and scoring each one against the state) makes schema-invalid outputs unrepresentable. This removes parse failures by construction rather than by constrained decoding."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Encode options independently, then decide jointly. Encoding the request and each candidate with a shared encoder, then letting only the request state attend over the set of candidate vectors, keeps option computation reusable across requests. Decisions can still depend on the set, for example when adding an alternative flips the preference between A and B."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Permutation symmetry by construction. Removing positional information from the candidate pathway and scoring every candidate with one shared function makes output probabilities permutation-equivariant. Position bias is eliminated structurally rather than mitigated by augmentation or debiasing."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Coverage versus competition. A separate \"coverage\" probability (whether any acceptable candidate exists, e.g. a sigmoid of the max candidate score) multiplied by a conditional softmax gives an open-set decision. \"None apply\" becomes a calibrated outcome instead of an extra option that competes for mass."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "A companion yes/no probe for null detection. When a selection head must always pick something, a parallel binary \"does anything fit?\" question supplies the abstention signal. The official guidance says this works better than appending a \"none of the above\" option."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Question-blind state caching. Encoding the context once, question-blind, and answering each query through a few learned slots that cross-attend into the cached representation makes the marginal cost of an extra question nearly constant. The price is that the state cannot specialise to the question, which caps accuracy on long contexts with narrow questions."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Information-flow isolation between parallel queries. Folding questions into the batch dimension, so they see the shared state but never each other, makes answers order-independent and parallel. Any inter-question dependency must then be handled by explicit multi-call orchestration in code."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Speculative fan-out. When queries are nearly free relative to encoding the context, asking conditional follow-up questions up front and letting code read them only when a gating answer fires removes round-trips. It is a branch-prediction-style trade of cheap compute for latency."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Model judgments, code decisions. Decomposing a decision into atomic perceptual judgments that a model answers, and putting the combination logic (truth table, weights, thresholds) in deterministic code, makes the policy auditable and testable. It also lets weights change without re-querying the model."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Proper scoring rules as RL reward. Rewarding a probabilistic readout with a strictly proper score (Brier or log) makes truthful belief reporting the optimal policy. Outcome-correctness rewards are linear in the predicted distribution and therefore push it to collapse onto one answer."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Calibrate the readout, then reinforce the reasoning. First optimise the post-rationale answer distribution with a proper score while giving the rationale no gradient, then run policy-gradient on rationales with the calibrated readout's own proper score as reward. This avoids the overconfidence that outcome-reward RL induces."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Score single-sample readouts, not mixtures. When a deployed system makes one query per item, applying the scoring rule to each per-rationale readout (rather than the average over rationales) aligns training with deployment. It avoids rewarding inter-sample disagreement that a single query never exhibits."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Soft targets from ensemble disagreement. Training against soft probability targets derived from a teacher ensemble's vote split across paraphrases, option orders and temperatures (7/3 \u2192 0.7) supplies a cheap calibration signal without outcome labels. It caps the student at the teacher's knowledge and biases."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Consistency regularisation over semantic-preserving perturbations. Penalising divergence (e.g. symmetric KL) between predictions on paraphrased states, shuffled JSON keys and permuted options directly targets order and position bias and input-format sensitivity in discriminative heads."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Separate aleatoric probability from epistemic confidence. An evidential (Dirichlet) head trained with stop-gradient on the class probabilities distinguishes \"genuinely 60/40\" from \"the model doesn't know\". The confidence objective cannot blur the prediction it describes."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Concentration is not correctness. A confidence score computed from distribution peakedness is a different quantity from the probability of being correct. Gating automation on peakedness alone conflates the two, so routing should use calibrated probabilities and task-specific calculations over them."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Ordinal heads with expectation readout. Modelling rubric scores with monotone cumulative thresholds (CORAL-style) and reporting the expected level keeps the rubric's ordering in the loss. The expectation can hide bimodal distributions, so downstream code should inspect the level probabilities."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "A differentiable calibration penalty. A soft-binned ECE term added to a proper-scoring loss directly optimises the group-level confidence\u2013accuracy gap. Because ECE is a group statistic, it gives no per-instance guarantee and can be gamed by bin structure."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Single-pass logit readout from instruction-tuned LMs. Reading the next-token distribution over option letters at the final position turns an off-the-shelf LM into a single-pass decision model. A short LoRA plus a decision head initialised from a slice of the LM head can match a proprietary specialised model. This suggests the capability is latent and the gain comes from the readout, not the architecture."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Selective prediction as the calibration payoff. Evaluating calibrated decision models by risk\u2013coverage (AURC, coverage at an error budget) measures the operational value of probabilities: how much can be automated at a fixed error rate. Thresholds should be set on a held-out calibration split, not on test labels."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "A two-stage score-then-choose design for large option sets. Scoring candidates independently and then choosing among a shortlist lets a fixed-cost decision head scale to hundreds or thousands of options. It mirrors retrieve-then-rerank with a shared per-candidate scorer."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Reusable option memory with layer-specific K/V caches. Caching each option's vector and its projected keys/values per decision layer lets newly assembled candidate subsets reuse prior computation. Decisions are still recomputed fresh, giving large latency gains on recurring candidate banks without caching answers."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Model-generated reference labels inflate apparent quality. Benchmarking a distilled decision model against the averaged judgments of frontier LLMs measures agreement with the teacher rather than correctness. This is evidenced by higher agreement with frontier models than with ground truth."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Select instead of generate. Converting extraction into choice (code proposes candidate spans or values, the model picks one, code copies or normalises it) keeps a non-generative model useful for extraction tasks while preserving exact-copy fidelity."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Structural invariants do not emerge from independent heads. Querying a statement and its negation as two independent probability heads does not enforce P(A) + P(\u00acA) = 1 (observed sums like 1.19). Logical coherence must be imposed architecturally or checked in code."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Fixed compute per query is a System-1 ceiling. A decision model with constant per-question compute and no scratchpad fails on counting, arithmetic, date comparison and multi-hop indirection. Such sub-tasks should be offloaded to code or escalated to a reasoning model through a confidence-gated cascade."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Identity and zero initialisation for bolt-on decision blocks. Initialising attention projections to identity, zero-initialising FFN outputs, and gating residual updates by a learned temperature-scaled scalar lets a new decision block start as a near no-op on top of a pretrained encoder. This stabilises LoRA fine-tuning. [1] ---"
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Paired fact probes separate perception from composition. Pairing every decision query with independently answered factual probes about the same state turns an opaque accuracy number into an error taxonomy: errors where all facts were read correctly isolate integration and planning failures from perception failures."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Self-generated evidence as scaffolding. Feeding a single-pass model its own probe answers back into the decision prompt recovers most of the read-right/act-wrong gap. The model's latent knowledge is enough; what fails is combining that knowledge within one forward pass."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Code composition over model-extracted atoms. When probed facts fully determine the action, extracting the atoms with the model and composing them in deterministic code repairs composition failures. Model judgment is confined to perception, and logic moves to verifiable code."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Sub-goal as the missing latent variable. In agent states, the decisive missing input is often the next sub-goal rather than a fact. Supplying it explicitly (or querying it as a separate decision) converts an implicit planning step into an observable, checkable one."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "The evaluation/simulation split defines single-pass competence. A single-pass decision model does well when the correct option can be judged from information in the input, and fails when it must predict unobserved consequences. Supplying simulation externally (lookahead, physics, opponent prediction) turns it into a strong controller."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Decomposed queries beat fused queries. A model that answers \"what will the opponent do?\" correctly in one call can still fail when one call must both predict and evaluate. Splitting a decision into sub-queries routes around the model's limited single-pass composition depth."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Post-hoc judging is easier than prospective acting. A judge that sees a completed episode observes consequences that an actor must anticipate, so weak actors can be strong dense reward providers. Using decision models as RL teachers exploits this asymmetry."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Confidence-gated escalation as a cascade primitive. Thresholding the top-label probability of a cheap typed model and escalating only below the threshold keeps near-strong-judge accuracy at a fraction of the cost, provided confidence is informative on that task's distribution."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Cascades need error complementarity, not just confidence. A cheap-then-expensive cascade only helps if the fallback is right where the first stage is confidently wrong. Measuring how often the fallback repeats the first stage's most-confident errors tests cascade viability directly."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Deferral should be benchmarked against random deferral at matched budget. Comparing confidence-based handoff to random handoff at the same deferral rate isolates the information value of the confidence signal from the benefit of simply calling a stronger model more often."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Value of Intervention unifies scheduling rules. Framing fast-to-slow escalation as \"call when expected improvement exceeds query cost\" makes fixed-ratio, fixed-budget and history-gated schedulers special cases of one threshold rule, and gives a common way to measure them."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Closed-loop timing changes what a good decision is. In environments that keep running, latency is part of correctness: a slower, more accurate decision can lose to a faster one because the state drifts. Decisions in loops should be scored by episode outcome under realistic timing."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Static accuracy does not transfer to loop success. Models that match or beat LLMs on isolated typed decisions can still rarely complete episodes. Benchmarks need both static and closed-loop tracks, because compounding errors and sub-goal ordering show up only in the loop."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Interface ablation with a shared base model. Exposing one LLM through both a typed decision head and free generation isolates the effect of the readout interface on accuracy, calibration (Brier) and loop success, separately from model capability."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Calibration against a finite-sample noise floor. Reporting calibration error relative to that of a perfectly calibrated predictor on the same sample size prevents small-sample ECE noise from being read as miscalibration."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Probability quality should be judged by induced cost. Evaluating probabilities through selective prediction, proper scoring rules and realised cost under asymmetric cost matrices shows cases where acting on the probabilities is worse than taking the argmax. Calibration metrics alone hide this."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Constructed ground-truth probabilities isolate calibration. Items whose true probability is known by construction (counts, Bayes updates), rendered in several surface formats, test calibration directly and expose readout-specific skew (Choice vs Score)."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Accuracy and calibration should be reported per subgroup for safety gates. Aggregate accuracy and mean calibration error can hide subgroups (attack families) misclassified as safe with high confidence, so security-gate evaluation needs per-subgroup confident-error analysis."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Label-free invariance flip rates as a reliability metric. Re-querying with option names swapped, options reordered or questions paraphrased, and counting flips, measures reliability without gold labels at the cost of a few extra forward passes."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Schema validity is not semantic correctness. Constrained typed outputs drive format errors to zero while semantic errors persist, so a type check gives no signal for errors that come from following the option name rather than its definition."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Locating a bias by intervening on input rendering. Changing only how options are serialised into the input, with no weight changes, can switch label-over-definition bias on or off. This attributes the bias to input rendering rather than to the decision head."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Option labels are an attack channel. When option names are rendered into the model input, the label set becomes attacker-reachable configuration, and renaming the permissive option alone can open a guardrail. Treat labels as untrusted input or neutralise them (e.g. A/B)."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Two-stage shortlist-then-runoff for order invariance. Scoring each option alone to shortlist, then comparing the shortlist under all positional placements, gives exact order invariance in two passes and scales better than cyclic averaging."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Independent option encoding with immutable option memory. Encoding request and options separately with a shared encoder, refining only the request state against fixed option memory, gives permutation invariance by construction, allows option caching across requests, and scales to thousands of candidates."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Separating coverage from competition. Estimating \"does any option fit?\" separately from \"which option fits best?\" makes abstention or null-detection a first-class output rather than a low-max-probability heuristic."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Paired evaluation on byte-identical inputs. Comparing two decision models on exactly the same inputs with exact McNemar tests on discordant pairs gives much tighter, more honest comparisons than independent-sample accuracy differences."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Channel-shift robustness tests. Moving the same text between channels (user input vs tool output vs document) exposes false-positive shifts that depend on context position rather than content. Channel-native content is the control for this artefact."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Self-auditing headline cost claims. Re-deriving one's own efficiency claims with every pipeline cost included (e.g. pre-screens) can shrink a reported saving drastically. Cost accounting belongs in the evaluation protocol."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Execution-aware tracing of typed decisions. Following poisoned evidence through retrieval, choice, action and persisted state separates exposure, harm and protection, so the security of a typed interface is measured by state changes rather than by output validity."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Bias batteries transfer from LLM judges to typed judges. Running established judge-bias suites (e.g. CALM) on typed decision models shows that low cost and high consistency coexist with large stylistic biases such as emotional tone, so task-specific bias testing is needed before substitution."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Supervised small classifiers are the label-rich baseline. When task labels exist, small trained classifiers match or beat zero-shot decision models. Zero-shot typed models are most valuable in the label-scarce regime and as escalation-capable first stages. [2610.00346; 2609.32160] ---"
+  }
+ ],
+ "gaps": [
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Vendor vs independent disagreement on Gemini Decision 1. - Google says it leads 7 of 9 benchmarks with the lowest ECE and 92.2% on JevBench. - Artificial Analysis gives it a Decision Index of 66 (median), 211 ms (slower than average) and $345 per 1M tasks, 2.5x the median. - Coverage also has Jev ahead on 2 of 7 shared tests and cheaper on the shared suite ($0.68 vs $0.88)."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Microsoft-Decision-1 is not independently evaluated. - The 83.5% / 36-benchmark result, 85 ms latency and 1.3% flip rate are all vendor claims, and the datasets and latency conditions are not published. - No AA per-model score surfaced in search. - Measured gateway latency (0.28 s P50 on OpenRouter; 190 to 270 ms external) is about 2 to 3x the vendor figure. - The \"35x faster than GPT-6 Sol\" claim has an unclear basis."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Mechanisms are not disclosed. - Neither Microsoft, Google nor OpenAI says how probabilities are produced: option-token logits, a scoring head, constrained-decoding probabilities, or JSON-schema filling by a general LLM. - None says what calibration objective or post-hoc calibration (e.g. temperature scaling) is used. - Google does not disclose the base model; Microsoft does not describe its post-training recipe."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Calibration is claimed, rarely tested directly. - TypedBench finds a hosted model systematically underconfident. - Coherence audits show that a question and its negation, or exclusive labels, do not sum to 1. - No coherence audit was found for Microsoft-Decision-1, gemini-decision-1 or the OpenAI Decisions API. - Calibration under distribution shift, with new domains or new option sets, is not reported."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Order and rival effects. Only Prism-1 makes order and rival independence hold by construction. Vendors report perturbation flip rates (MS 1.3%; Sarvam 0 of 2,000 after \"standardising option order\"), but the protocols differ and are not public. Prism-1's own benchmarks and baselines were not visible."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Many questions per call is untested for interference. Gemini scores up to 1,000 questions and OpenAI up to 400 over a shared input. Whether co-asked questions bias each other in these hosted models is unmeasured; TypedBench checked this only for open decoders, which were unaffected."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Rubric aggregation pitfall. The weighted score is the expectation over levels, and rounding it can land on a near-zero-probability level. Vendors give no guidance on cost-aware readout."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Closed-loop and agentic failure. - System1-Arena finds small System-1 models at \u22643.1% success vs 32.9% for the best open LLM in interactive tasks. - \"Reading Right, Acting Wrong\" shows most action errors follow correct perception. - System Switch's fast-slow agent never finished a Doom level. - Vendors market these models for agent control and routing without closed-loop evidence."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Specialist baselines are omitted. Fine-tuned DeBERTa-v3-large beats decision models on most labelled tasks (2610.00346), yet vendor tables compare only against LLMs and other decision models."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Training-free baselines are also omitted. Letter-logit readout from open LLMs nearly matches Jev untrained (2610.17205), and vendor tables do not include this baseline."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Contamination and benchmark provenance. - JevBench is the shared yardstick, but it was created around a competitor's model. - Sarvam's \"Artificial Analysis recreation\" is self-run, and its eval set is unreleased. - Jev 1.14's average is reported inconsistently (64.5 vs 60.7). - One open checkpoint's lead came from training-data exposure."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Benchmark churn and inconsistent leaderboards. AA moved from v2 to v2.1 within days, and per-model pages may come from different snapshots. Pinggy's Decision Index numbers (e.g. 174) use a different scale. Rankings shift with snapshot and weighting."
+  },
+  {
+   "source_file": "decision1_gemini_landscape.md",
+   "text": "Data gaps in this corpus. - No full text could be fetched. The Towards AI and Vercel Microsoft-Decision-1 pages and the gradually.ai table were unreadable, and Turing Post and Product Builder are known only from search summaries. - No primary source was found for FunDM, SanSi, System X or LAVOIR, and no orgs were found for d1, Celeris, Quyet, pplx-decider or Torchcast. - Every figure above should be re-verified once fetch access to these hosts is allowed."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "RLCD is undisclosed. TypeSafe has published no paper, objective, reward definition, data description or ablation separating RLCD from the architecture. Every concrete RLCD formula in circulation (proper-score rewards with a batch calibration penalty; open-jev's five-term loss; OpenJev-RLCD's PRDO plus REINFORCE) is a third-party interpretation. The word \"RL\" itself may be loose: the open reconstructions are mostly supervised soft-target training."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Jev's architecture is undisclosed. \"Non-autoregressive\", \"parallel sampler\" and \"two-stage score-then-choose above 255 options\" are second-hand descriptions. The SDK reports `output_tokens`, which hints at some token-level output and may contradict the \"no decoding\" framing."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Calibration evidence is thin and inconsistent. No official reliability diagram or ECE has been published. Independent ECE figures range from 0.059 to 0.121 and are often no better than small general LLMs. Calibration under distribution shift and model-version drift (`jev-latest`) is unmeasured. ECE is group-level and says nothing about individual decisions."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Teacher-capped quality. Vendor evals use frontier-LLM averages as reference labels, and one outside analysis found Jev agrees with frontier models more than with ground truth. If training targets come from LLM ensembles (a hypothesis), Jev inherits their biases and cannot exceed them without outcome data."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Order sensitivity in Jev. Jeva's authors report Jev-1.13.0 flips on 17% of Choice items under permutation. Official guidance warns that positional option names bias answers. Jeva's structural fix has not been independently replicated."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Logical incoherence across questions. Independent questions break invariants (negation pairs summing above 1). Multi-label questions forced into a Choice split probability mass."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Null handling. Jev's Choice always picks something, and the official workaround is a companion Noul. Jeva's coverage head is a principled alternative (98.66% AUROC on one benchmark) but untested at scale. Open-set calibration of `p_null` is not reported."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "System-2 gaps: counting, arithmetic, dates, multi-hop indirection, context rot on large or irrelevant state, adversarial or injected state, and low-resource languages. Rubric-quality judgments and noisy or fine-grained labels degrade for all models (per 2609.37647). There is no mechanism for adaptive compute per question."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Question-blind encoding ceiling. If the state is encoded without seeing the question (as hypothesised for Jev and true for Jeva's option side), narrow questions over long states lose accuracy. How much is unquantified."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "No customisation path for Jev. There is no fine-tuning and the same weights serve every account, so domain adaptation happens only through prompt-like `state`/`criteria` engineering. The official docs warn this risks \"prompt gymnastics\". Open models (Jeva, Inner-Jev recipes) allow fine-tuning but lack a calibration-preserving fine-tune protocol."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Benchmark hygiene: - The headline 193.6\u00d7/444.6\u00d7 multipliers come from 4 vendor-built workflows with LLM-generated references and disputed baselines. - Latency was measured from the vendor's region. - Outside cost ratios range from 8.6\u00d7 to ~580\u00d7. - Jeva's comparisons and the Inner-Jev SOTA claims are author-reported on new or partially released benchmarks (OpenDecisions, JevBench, Typed Test). - Oracle coverage metrics use test labels."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Annotator-disagreement uncertainty. OpenJev-RLCD reports that RLCD-style training provably cannot beat cross-entropy when uncertainty stems from label disagreement (ChaosNLI). It is unclear what \"calibrated\" should mean for inherently contested judgments."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Moat question. Training-free logit readouts from open LMs nearly match Jev (79.6 vs 80.1 on OpenDecisions), and simple LoRA recipes exceed it. This suggests the contribution may be productisation (interface, serving, pricing) more than a new learning method. That question is open until TypeSafe publishes technical details."
+  },
+  {
+   "source_file": "jev_jeva_rlcd.md",
+   "text": "Unverified in this corpus: none of the eight seed URLs nor the arXiv PDFs could be read directly (network policy). Per-source bullets marked [search-snippet only] need re-verification against the originals."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Closed-loop vs static gap. System1-Arena and SO-Arena show that static decision quality does not predict episode success, and System Switch never reaches the Doom exit. No paper yet shows a System One plus System Two hybrid that beats both components on end-to-end task success, rather than only beating random deferral. [2610.21244, 2610.09683]"
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Learning the sub-goal. Reading Right shows that supplying sub-goals or facts recovers accuracy, but how to produce the sub-goal cheaply at run time (without a reasoning model) is open. Actor/Judge/Teacher documents the same prerequisite-sub-goal pull. [2610.18579, 2611.17167]"
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Simulation without an oracle environment copy. Code Owns the Simulation relies on exact environment clones, and multi-step consequences grow search cost quickly. [2610.01834]"
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Cascade fallback complementarity. Rao & Callison-Burch show correlated errors between decision models and LLM judges. Designing decision models (or fallbacks) for complementary errors is proposed but not done. [2609.29769]"
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Defences against option-channel and context attacks. Every defence tested in One Word Opens the Gate is defeated; Poisoned into Action reports exposure/harm/protection gaps without a fix. [2610.12292, 2610.15537]"
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Underconfidence and cost-aware use of probabilities. TypedBench finds hosted-model probabilities can be worse than the argmax under asymmetric costs, so recalibration or decision rules for typed outputs are needed. [2610.11392]"
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Evidence base is immature. The evidence audit finds no independent accuracy advantage of the typed readout, and many results are v1 preprints with ongoing evaluations. [2609.32160, 2610.18579]"
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Mostly one hosted model. A large share of the evidence is about Jev (often pinned at jev-1.13.0) plus Laya. I found no arXiv paper evaluating Microsoft-Decision-1 or gemini-decision-1 by name (a targeted search returned none), and OpenAI Decisions appears only as a comparator (2610.18579, 2610.21244)."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Training is barely studied. Almost every paper evaluates frozen models. Training objectives for calibrated decision heads (beyond Jeva's architecture and the pentest paper's discussion of RLHF/RLAIF variants), and fine-tuning System One models on loop-specific failure taxonomies, are largely absent."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "No standard null/abstain evaluation across papers. Null-awareness appears in Jeva and SO-Arena, but agent-loop papers rarely score \"no valid option\" states."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Interaction of robustness axes. Order, label-name, paraphrase and channel effects are each studied in isolation. Joint effects (e.g. a renamed label in a shuffled list under injected context) and certified invariance are unexplored."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Learned vs heuristic gates. System Switch uses heuristic history signals and When to Ask for Help derives a VoI rule for VLAs; learned, calibrated escalation policies for text-agent loops with System One actors are not evaluated."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Composition depth of a single forward pass. Several papers show failures when one call must integrate several facts or simulate, but none measures how many compositional steps a single-pass decision head can reliably do."
+  },
+  {
+   "source_file": "research_papers.md",
+   "text": "Replication. Aggregator-reported figures sometimes disagree (dates, rankings, the Torchcast-27B accuracies), and some reported repos have no verified official status. Independent replication is thin."
+  }
+ ]
+}

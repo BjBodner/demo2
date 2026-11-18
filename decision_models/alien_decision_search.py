@@ -144,9 +144,14 @@ def main():
     ap.add_argument("--keep", type=int, default=400, help="top sets kept per (beta, bucket)")
     ap.add_argument("--max-per-atom", type=int, default=6, help="diversity cap in kept lists")
     ap.add_argument("--validate", type=int, default=200)
+    ap.add_argument("--anchors", type=Path, help="JSON with an 'anchors' {cluster_id: label} map (e.g. from map_corpus.py); default: built-in DECISION_ATOMS")
     args = ap.parse_args()
     torch.set_num_threads(torch.get_num_threads())
 
+    global DECISION_ATOMS
+    if args.anchors:
+        DECISION_ATOMS = {int(k): v for k, v in json.loads(args.anchors.read_text())["anchors"].items()}
+    log(f"{len(DECISION_ATOMS)} anchor atoms: {sorted(DECISION_ATOMS)}")
     root = args.alien_root
     coh_model, coh_tm = load_model(str(root / "models/coherence_model"))
     coh_model.eval()
