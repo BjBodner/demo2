@@ -1,0 +1,210 @@
+{
+ "N1": {
+  "triplet": [
+   10,
+   56,
+   127
+  ],
+  "z_coherence": 1.32,
+  "z_unavailability": 1.61,
+  "lists": [
+   "beta=0.7 | bridge (1 decision atom) #31"
+  ]
+ },
+ "N2": {
+  "triplet": [
+   40,
+   56,
+   127
+  ],
+  "z_coherence": 1.2,
+  "z_unavailability": 1.7,
+  "lists": [
+   "beta=0.7 | bridge (1 decision atom) #19"
+  ]
+ },
+ "N3": {
+  "triplet": [
+   35,
+   42,
+   247
+  ],
+  "z_coherence": 1.23,
+  "z_unavailability": 1.67,
+  "lists": [
+   "beta=0.7 | bridge (1 decision atom) #23"
+  ]
+ },
+ "N4": {
+  "triplet": [
+   8,
+   36,
+   161
+  ],
+  "z_coherence": 1.21,
+  "z_unavailability": 1.75,
+  "lists": [
+   "beta=0.7 | bridge (1 decision atom) #11"
+  ]
+ },
+ "N5": {
+  "triplet": [
+   144,
+   161,
+   162
+  ],
+  "z_coherence": 1.93,
+  "z_unavailability": 1.19,
+  "lists": [
+   "beta=0.7 | core (2-3 decision atoms) #10"
+  ]
+ },
+ "N6": {
+  "triplet": [
+   71,
+   143,
+   149
+  ],
+  "z_coherence": 2.93,
+  "z_unavailability": 0.59,
+  "lists": [
+   "beta=0.5 | bridge (1 decision atom) #41"
+  ]
+ },
+ "N7": {
+  "triplet": [
+   1,
+   136,
+   261
+  ],
+  "z_coherence": 1.44,
+  "z_unavailability": 1.81,
+  "lists": [
+   "beta=0.5 | bridge (1 decision atom) #76",
+   "beta=0.7 | bridge (1 decision atom) #4"
+  ]
+ },
+ "N8": {
+  "triplet": [
+   56,
+   136,
+   140
+  ],
+  "z_coherence": 2.24,
+  "z_unavailability": 0.6,
+  "lists": [
+   "beta=0.5 | core (2-3 decision atoms) #25"
+  ]
+ },
+ "N9": {
+  "triplet": [
+   42,
+   52,
+   170
+  ],
+  "z_coherence": 3.43,
+  "z_unavailability": -0.55,
+  "lists": [
+   "beta=0.5 | core (2-3 decision atoms) #24"
+  ]
+ },
+ "N10": {
+  "triplet": [
+   161,
+   163,
+   176
+  ],
+  "z_coherence": 1.17,
+  "z_unavailability": 1.61,
+  "lists": [
+   "beta=0.7 | core (2-3 decision atoms) #6"
+  ]
+ },
+ "N11": {
+  "triplet": [
+   38,
+   163,
+   188
+  ],
+  "z_coherence": 1.1,
+  "z_unavailability": 1.76,
+  "lists": [
+   "beta=0.7 | bridge (1 decision atom) #16"
+  ]
+ },
+ "N12": {
+  "triplet": [
+   58,
+   163,
+   165
+  ],
+  "z_coherence": -0.17,
+  "z_unavailability": 1.97,
+  "lists": [
+   "beta=0.7 | core (2-3 decision atoms) #25"
+  ]
+ },
+ "N13": {
+  "triplet": [
+   10,
+   75,
+   146
+  ],
+  "z_coherence": 1.08,
+  "z_unavailability": 1.4,
+  "lists": [
+   "beta=0.7 | core (2-3 decision atoms) #29"
+  ]
+ },
+ "N14": {
+  "triplet": [
+   45,
+   72,
+   224
+  ],
+  "z_coherence": 0.92,
+  "z_unavailability": 1.42,
+  "lists": [
+   "beta=0.5 | core (2-3 decision atoms) #57",
+   "beta=0.7 | core (2-3 decision atoms) #40"
+  ]
+ },
+ "N15": {
+  "triplet": [
+   2,
+   98,
+   184
+  ],
+  "z_coherence": 1.36,
+  "z_unavailability": 1.7,
+  "lists": [
+   "beta=0.5 | bridge (1 decision atom) #111",
+   "beta=0.7 | bridge (1 decision atom) #9"
+  ]
+ },
+ "N6b": {
+  "triplet": [
+   56,
+   143,
+   155
+  ],
+  "z_coherence": 1.37,
+  "z_unavailability": 1.35,
+  "lists": [
+   "beta=0.5 | core (2-3 decision atoms) #33",
+   "beta=0.7 | core (2-3 decision atoms) #20"
+  ]
+ },
+ "N2b": {
+  "triplet": [
+   48,
+   58,
+   88
+  ],
+  "z_coherence": 3.82,
+  "z_unavailability": -0.93,
+  "lists": [
+   "beta=0.5 | core (2-3 decision atoms) #23"
+  ]
+ }
+}

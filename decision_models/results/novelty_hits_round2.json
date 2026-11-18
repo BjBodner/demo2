@@ -1,0 +1,99 @@
+{
+ "N1 hub options in large option sets": [],
+ "N2 numeric/date minimal pairs for typed decisions": [
+  [
+   "2026-10-27",
+   "2610.37732v1",
+   "ThinkJev: One Thought, Every Budget for Calibrated Typed Decisions"
+  ],
+  [
+   "2026-10-27",
+   "2610.36915v1",
+   "Do We Need an LLM to Know Why Sources Conflict? Decision Models for Knowledge-Conflict Typing in RAG"
+  ],
+  [
+   "2026-10-13",
+   "2610.18529v2",
+   "How Reliable Are System-One Decisions in Medicine? A Comparative Study of Jev, Jev-like Models, and LLMs"
+  ],
+  [
+   "2026-10-03",
+   "2610.04345v1",
+   "System One Models for Wireless Decision-Making:Applications and Performance Evaluation"
+  ],
+  [
+   "2026-09-30",
+   "2609.39496v1",
+   "When the Right Answer Is Missing: An Arithmetic-Dependent Rejection Bottleneck in Jev"
+  ],
+  [
+   "2026-09-20",
+   "2609.23886v1",
+   "this-that-model-1.0: A typed decision model that decides in 30 ms, for a millionth of a cent"
+  ],
+  [
+   "2024-04-24",
+   "2404.15952v2",
+   "SPHINCS_BSSN: Numerical Relativity with Particles"
+  ],
+  [
+   "2018-09-11",
+   "1809.05529v2",
+   "Entanglement Entropy from Numerical Holography"
+  ],
+  [
+   "2016-02-02",
+   "1602.01049v2",
+   "Numerical precession in variational discretizations of the Kepler problem"
+  ],
+  [
+   "2010-09-10",
+   "1009.2056v1",
+   "Numerical Modelling of Wind-Waves. Problem and Results"
+  ]
+ ],
+ "N3 evidence position / context rot in decision models": [
+  [
+   "2026-11-07",
+   "2611.10414v1",
+   "Track or Follow? A Jev-Compatible Multi-Agent Trading System When Web News Lags the Market"
+  ],
+  [
+   "2026-11-04",
+   "2611.06384v1",
+   "Presentation Sensitivity in Typed Decision Models for Subjective Text Evaluation"
+  ],
+  [
+   "2026-09-30",
+   "2610.00831v1",
+   "AnyJev Technical Report"
+  ],
+  [
+   "2026-09-28",
+   "2609.34862v1",
+   "JEV as a Judge for Agent Trace Security: An Empirical Comparison with Generative LLM Judges"
+  ],
+  [
+   "2026-09-26",
+   "2609.35865v1",
+   "PACT: Pairwise-Anchored Calibrated Tuning for Single-Token Typed Decisions"
+  ],
+  [
+   "2026-09-20",
+   "2609.23886v1",
+   "this-that-model-1.0: A typed decision model that decides in 30 ms, for a millionth of a cent"
+  ]
+ ],
+ "N4 label-shift correction of decision probabilities": [
+  [
+   "2026-10-25",
+   "2610.34329v1",
+   "SHIFT-JEV: Certified Abstention and Gain-Gated Continual Adaptation for LLM-Based Decision Models under Distribution Shift"
+  ],
+  [
+   "2026-10-19",
+   "2610.26325v1",
+   "Typed Decision Models under Prevalence Shift: Decision Training, Calibration, and Implicit Priors"
+  ]
+ ]
+}

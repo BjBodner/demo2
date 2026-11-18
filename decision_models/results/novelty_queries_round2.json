@@ -1,0 +1,17 @@
+{
+ "N1 hub options in large option sets": ["all:hubness AND all:\"decision model\"", "all:hubness AND all:\"tool retrieval\"", "all:\"System One\" AND all:\"option embeddings\""],
+ "N2 numeric/date minimal pairs for typed decisions": ["all:\"System One\" AND all:numeric", "all:\"decision model\" AND all:threshold AND all:arithmetic AND all:typed", "all:\"typed decision\" AND all:dates"],
+ "N3 evidence position / context rot in decision models": ["all:\"System One\" AND all:\"long context\"", "all:\"decision model\" AND all:\"lost in the middle\"", "all:\"typed decision\" AND all:position"],
+ "N4 label-shift correction of decision probabilities": ["all:\"label shift\" AND all:\"decision model\"", "all:\"prevalence shift\" AND all:\"System One\"", "all:\"label shift\" AND all:\"optimal transport\" AND all:calibration"],
+ "N5 label-efficient conformal calibration set selection": ["all:conformal AND all:\"calibration set\" AND all:\"active\" AND all:selection", "all:conformal AND all:\"label budget\"", "all:\"System One\" AND all:conformal"],
+ "N6 bandit red teaming of typed guardrails": ["all:\"typed decision\" AND all:attack AND all:search", "all:\"System One\" AND all:\"red teaming\"", "all:\"decision model\" AND all:guardrail AND all:adversarial"],
+ "N7 watermark against distillation of decision APIs": ["all:watermark AND all:distillation AND all:\"decision model\"", "all:\"model extraction\" AND all:watermark AND all:probabilities AND all:API", "all:\"System One\" AND all:watermark"],
+ "N8 membership inference on decision models": ["all:\"membership inference\" AND all:\"System One\"", "all:\"membership inference\" AND all:\"decision model\"", "all:\"membership inference\" AND all:\"typed decision\""],
+ "N9 active distillation from decision API": ["all:\"active distillation\" AND all:\"decision model\"", "all:\"System One\" AND all:distillation AND all:budget", "all:\"active learning\" AND all:Jev"],
+ "N10 sequential evidence accumulation early decision": ["all:\"sequential probability ratio test\" AND all:\"language model\" AND all:classification", "all:\"System One\" AND all:\"early exit\" AND all:tokens", "all:\"drift diffusion\" AND all:\"language model\" AND all:decision"],
+ "N11 option definition length bias": ["all:\"System One\" AND all:length AND all:bias", "all:\"option length\" AND all:\"multiple choice\" AND all:bias AND all:LLM", "all:\"typed decision\" AND all:verbosity"],
+ "N12 subgroup calibration fairness for decision models": ["all:\"System One\" AND all:fairness", "all:\"decision model\" AND all:moderation AND all:calibration AND all:dialect", "all:\"typed decision\" AND all:fairness"],
+ "N13 PMI-filtered synthetic decision data": ["all:\"System One\" AND all:\"synthetic data\"", "all:\"decision model\" AND all:\"hypothesis-only\" AND all:artifacts", "all:\"typed decision\" AND all:shortcut"],
+ "N14 incremental decisions over edited agent states": ["all:\"System One\" AND all:cache AND all:agent", "all:\"decision model\" AND all:incremental AND all:\"KV cache\"", "all:\"typed decision\" AND all:latency AND all:agent"],
+ "N15 IRT efficient evaluation of decision models": ["all:\"item response theory\" AND all:\"decision model\"", "all:\"System One\" AND all:benchmark AND all:\"item response\"", "all:tinyBenchmarks"]
+}
