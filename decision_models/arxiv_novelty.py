@@ -9,8 +9,7 @@ for key, queries in Q.items():
         for attempt in range(6):
             try:
                 x = urllib.request.urlopen(url, timeout=60).read().decode(); break
-            except urllib.error.HTTPError as err:
-                if err.code != 429: raise
+            except Exception:  # 429 rate limits and read timeouts: back off and retry
                 time.sleep(15 * (attempt + 1))
         else:
             print("  (gave up on query)", q); continue
@@ -21,5 +20,6 @@ for key, queries in Q.items():
             hits.append((d, i, t))
         time.sleep(5)
     out[key] = sorted(set(hits), reverse=True)
-    print(f"\n## {key}"); [print("  ", *h) for h in out[key][:9]]
+    print(f"\n## {key}", flush=True); [print("  ", *h, flush=True) for h in out[key][:9]]
+    json.dump(out, open(sys.argv[2], "w"), indent=1)
 json.dump(out, open(sys.argv[2], "w"), indent=1)

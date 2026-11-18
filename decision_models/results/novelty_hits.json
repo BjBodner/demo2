@@ -1,0 +1,83 @@
+{
+ "A grammar-compiled masks for coherent typed decisions": [
+  [
+   "2026-09-27",
+   "2609.33971v1",
+   "Do System One Decisions Add Up? A Study of Probabilistic Coherence"
+  ],
+  [
+   "2026-09-27",
+   "2609.33209v1",
+   "Beyond Calibration: Do a Typed-Decision Model's Probabilities Obey the Probability Axioms?"
+  ],
+  [
+   "2026-02-14",
+   "2602.13698v1",
+   "Localized-basis formulation of interacting Hamiltonians in flat topological bands: coherent states and coherent-like states for fractional physics"
+  ],
+  [
+   "2021-12-12",
+   "2112.06220v1",
+   "Coherent effects contribution to a fast gate fidelity in ion quantum computer"
+  ],
+  [
+   "2015-08-11",
+   "1508.02485v1",
+   "Guaranteed Cost Dynamic Coherent Control for Uncertain Linear Quantum Systems"
+  ],
+  [
+   "2015-07-27",
+   "1507.07394v2",
+   "Coherent Frameworks for Statistical Inference serving Integrating Decision Support Systems"
+  ],
+  [
+   "2008-03-13",
+   "0803.1911v2",
+   "On group theory for quantum gates and quantum coherence"
+  ]
+ ],
+ "B nonsense option names / definition grounding": [
+  [
+   "2026-11-02",
+   "2611.03935v1",
+   "Labtune: Treating Lab Organization and Information Sharing as Experimental Variables in LLM-Agent Discovery"
+  ],
+  [
+   "2026-10-08",
+   "2610.12292v1",
+   "One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails"
+  ],
+  [
+   "2026-09-22",
+   "2609.26758v3",
+   "Type-Safe Is Not Error-Free: Typed Decision Models Follow the Option Name, Not the Definition Bound to It"
+  ],
+  [
+   "2026-08-02",
+   "2608.01370v1",
+   "Understanding Synergistic Interactions among Pathology Foundation Models via Adaptive Fusion"
+  ],
+  [
+   "2026-01-09",
+   "2601.05861v1",
+   "Phase4DFD: Multi-Domain Phase-Aware Attention for Deepfake Detection"
+  ],
+  [
+   "2024-10-10",
+   "2410.08344v1",
+   "Front-End ASIC for the STROBE-X HEMA and WFM Detectors: Concept and Design"
+  ]
+ ],
+ "C layer-wise decision readout / adaptive depth": [
+  [
+   "2026-11-12",
+   "2611.16321v1",
+   "From Large Language Models to Efficient System One Models via Adaptive Computation"
+  ],
+  [
+   "2016-09-29",
+   "1611.05438v1",
+   "An Efficient Framework for Floor-plan Prediction of Dynamic Runtime Reconfigurable Systems"
+  ]
+ ]
+}
