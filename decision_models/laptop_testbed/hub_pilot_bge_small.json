@@ -1,0 +1,179 @@
+{
+ "model": "BAAI/bge-small-en-v1.5",
+ "n_options": 150,
+ "n_test": 4500,
+ "n_oos": 1000,
+ "pool": 5000,
+ "full_K": {
+  "raw": {
+   "accuracy": 0.6944444444444444,
+   "skew_N1": 0.43713438571392166,
+   "max_N1": 81,
+   "top10_share": 0.13755555555555554,
+   "err_top10_share": 0.2589090909090909,
+   "oos_top10_share": 0.143,
+   "oos_auroc": 0.90242,
+   "hub_names": [
+    "travel_suggestion",
+    "what_is_your_name",
+    "shopping_list",
+    "what_can_i_ask_you",
+    "make_call"
+   ]
+  },
+  "center": {
+   "accuracy": 0.7208888888888889,
+   "skew_N1": 0.24509136191534583,
+   "max_N1": 75,
+   "top10_share": 0.124,
+   "err_top10_share": 0.22770700636942676,
+   "oos_top10_share": 0.116,
+   "oos_auroc": 0.8943953333333333,
+   "hub_names": [
+    "what_is_your_name",
+    "shopping_list",
+    "recipe",
+    "change_volume",
+    "international_visa"
+   ]
+  },
+  "prior": {
+   "accuracy": 0.708,
+   "skew_N1": 0.2754395111058177,
+   "max_N1": 73,
+   "top10_share": 0.12911111111111112,
+   "err_top10_share": 0.23668188736681886,
+   "oos_top10_share": 0.129,
+   "oos_auroc": 0.9021082222222222,
+   "hub_names": [
+    "what_is_your_name",
+    "recipe",
+    "international_visa",
+    "shopping_list",
+    "restaurant_reviews"
+   ]
+  },
+  "csls": {
+   "accuracy": 0.7164444444444444,
+   "skew_N1": 1.8575126616722821,
+   "max_N1": 92,
+   "top10_share": 0.15244444444444444,
+   "err_top10_share": 0.34796238244514105,
+   "oos_top10_share": 0.264,
+   "oos_auroc": 0.8881568888888889,
+   "hub_names": [
+    "travel_suggestion",
+    "how_busy",
+    "carry_on",
+    "make_call",
+    "calculator"
+   ]
+  },
+  "invsoft": {
+   "accuracy": 0.7277777777777777,
+   "skew_N1": 0.6048145207419449,
+   "max_N1": 69,
+   "top10_share": 0.12644444444444444,
+   "err_top10_share": 0.2571428571428571,
+   "oos_top10_share": 0.173,
+   "oos_auroc": 0.9032628888888888,
+   "hub_names": [
+    "restaurant_reviews",
+    "international_visa",
+    "recipe",
+    "make_call",
+    "last_maintenance"
+   ]
+  }
+ },
+ "by_K": {
+  "8": {
+   "raw": {
+    "accuracy": 0.9152777777777777,
+    "skew_N1": -0.17427483443470437
+   },
+   "center": {
+    "accuracy": 0.9312500000000001,
+    "skew_N1": -0.22823147738554078
+   },
+   "prior": {
+    "accuracy": 0.928888888888889,
+    "skew_N1": -0.19582202135165266
+   },
+   "csls": {
+    "accuracy": 0.9318055555555556,
+    "skew_N1": 0.1709746791369207
+   },
+   "invsoft": {
+    "accuracy": 0.9309722222222222,
+    "skew_N1": 0.03730750044115276
+   }
+  },
+  "32": {
+   "raw": {
+    "accuracy": 0.8421875000000001,
+    "skew_N1": 0.06341905360388395
+   },
+   "center": {
+    "accuracy": 0.8559722222222221,
+    "skew_N1": -0.4192386659608518
+   },
+   "prior": {
+    "accuracy": 0.8503472222222221,
+    "skew_N1": -0.41081099365228746
+   },
+   "csls": {
+    "accuracy": 0.8547916666666667,
+    "skew_N1": 0.7353561660121779
+   },
+   "invsoft": {
+    "accuracy": 0.8611458333333334,
+    "skew_N1": -0.25440879681127454
+   }
+  },
+  "75": {
+   "raw": {
+    "accuracy": 0.7706666666666667,
+    "skew_N1": 0.38179037434063906
+   },
+   "center": {
+    "accuracy": 0.7919111111111109,
+    "skew_N1": -0.05474948466817864
+   },
+   "prior": {
+    "accuracy": 0.782325925925926,
+    "skew_N1": 0.027864287528215636
+   },
+   "csls": {
+    "accuracy": 0.789837037037037,
+    "skew_N1": 1.63647575007589
+   },
+   "invsoft": {
+    "accuracy": 0.7989629629629629,
+    "skew_N1": 0.3856548459802106
+   }
+  },
+  "150": {
+   "raw": {
+    "accuracy": 0.6944444444444444,
+    "skew_N1": 0.43713438571392166
+   },
+   "center": {
+    "accuracy": 0.7208888888888889,
+    "skew_N1": 0.24509136191534583
+   },
+   "prior": {
+    "accuracy": 0.708,
+    "skew_N1": 0.2754395111058177
+   },
+   "csls": {
+    "accuracy": 0.7164444444444444,
+    "skew_N1": 1.8575126616722821
+   },
+   "invsoft": {
+    "accuracy": 0.7277777777777777,
+    "skew_N1": 0.6048145207419449
+   }
+  }
+ }
+}
