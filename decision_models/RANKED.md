@@ -1,5 +1,8 @@
 # System One research options, ranked for a laptop
 
+> For each option's problem, approach, contributions and expected results, see
+> [IDEAS_DETAILED.md](IDEAS_DETAILED.md).
+
 26 options: the 11 from [README.md](README.md) plus 15 new ones, taken from deeper in
 the same Alien rankings ([`results/round2_triplets.json`](results/round2_triplets.json)).
 
