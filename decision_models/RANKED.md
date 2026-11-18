@@ -154,8 +154,15 @@ decisions take roughly 6 minutes, and about 1,000 LoRA steps take roughly 1.5 ho
 - *Evaluation:* the option-channel attack (2610.12292) and the testbed's flip rate
   (currently 28.5%).
 - Fine-tuning takes about 1–2 hours.
-- This is the **highest impact-to-effort option in the list**: every tested defence
-  against the attack currently fails.
+- *Correction (after reading 2610.12292 in full):* the option-renaming attack itself
+  is already **closed by plumbing**. Rewriting labels to A/B at the call site, or
+  never feeding labels to the network, leaves nothing to attack. What all its
+  defences failed against is *injected state text*, which B does not address.
+- So B's value is **robustness, not security**: models follow option names over
+  definitions (2609.26758) and flip on 28.5% of reorderings. It also helps
+  deployments that need meaningful labels, where A/B rewriting costs accuracy (one
+  policy's false-block rate rose from 25.3% to 36.0%).
+- Still a good laptop project with a crisp metric, but no longer "the only defence".
 - *Watch:* PACT (2609.35865) trains with pair and permutation terms, so cite it and
   compare against it.
 

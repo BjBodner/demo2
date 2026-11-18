@@ -373,8 +373,11 @@ reach about 8 models.
 **Problem.**
 - Typed models follow the option *name*, not the definition bound to it (2609.26758,
   2610.02586).
-- Renaming the permissive option opens guardrails 93–100% of the time, and every
-  defence tested fails (2610.12292).
+- Renaming the permissive option opens guardrails 93–100% of the time on models that
+  feed the label to the network (2610.12292).
+- That paper's cheapest fix, rewriting labels to A/B at the call site, closes the
+  channel, but costs accuracy: on one policy, wrongly blocked actions rose from 25.3%
+  to 36.0%. Telling the model to "ignore the names" doesn't work.
 - The measured baseline flips its answer on 28.5% of items when the options are only
   reversed.
 
@@ -388,7 +391,9 @@ reach about 8 models.
   metrics.
 
 **Contributions.**
-1. The first *training-time* defence against the option-channel attack.
+1. Label invariance learned in the *weights*, so labels can stay meaningful for readers
+   without being an attack surface. This is an alternative to the A/B-rewrite
+   plumbing fix that doesn't cost accuracy.
 2. A demonstration that label invariance can be learned cheaply (LoRA on a 0.6B model
    in about 2 hours on a laptop).
 3. An invariance audit (flip rate, attack success rate, confidence gap by label
@@ -804,7 +809,7 @@ the heaviest option on the list.
 | If you want… | Pick |
 |---|---|
 | A result in your first week, entirely on cached outputs | **2 (N5)**, **1 (G)** |
-| The highest impact for the effort | **10 (B)**: it attacks a problem with no working defence |
+| The highest impact for the effort | **10 (B)**: label/order invariance with a crisp metric (28.5% flips); the security case is weaker than first stated, see RANKED.md |
 | The cleanest "new phenomenon" paper | **3 (N1)** hub options, **6 (N3)** evidence position, **13 (F)** tail collapse |
 | Security and privacy | **11 (N8)** membership inference, **12 (N7)** watermarking, **10 (B)** |
 | Something the vendors would use | **1 (G)** drift fingerprints, **14 (J)** criteria optimisation, **2 (N5)** conformal labelling |

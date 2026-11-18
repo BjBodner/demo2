@@ -54,7 +54,8 @@ failures. Input-only billing gives latency under 100 ms to a few hundred ms.
   sub-goal.
 - *Static ≠ closed-loop* (System1‑Arena 2610.21244, SO‑Arena 2611.15777).
 - *Labels override definitions* and the *option-channel attack* (2609.26758,
-  2610.12292): renaming one option opens guardrails, and every defence tested fails.
+  2610.12292): renaming one option opens guardrails. Rewriting labels to A/B in the calling code
+  closes that channel; every defence against *injected state text* was defeated.
 - *Incoherent probabilities*: P(A)+P(¬A)≠1 (2609.33209), and fine-label versus
   category reconstructions disagree (2609.33971).
 - *Same mistakes as LLM judges* (2609.29769), which undermines cascades.
@@ -157,7 +158,10 @@ perturbations (73) + fairness as invariance across subgroups (165). Unavailabili
 z=+1.97, #5 bridge at β=0.7.
 
 **Problem.** The option-channel attack (2610.12292): renaming the permissive option
-opens typed guardrails 93–100% of the time, and every defence tested fails. Models
+opens typed guardrails 93–100% of the time on models whose calling library feeds the
+label to the network. Rewriting labels to A/B at the call site closes this channel
+completely, at some cost in wrongly blocked actions, and prompt-level "ignore the
+names" instructions do not. Models
 follow the option name, not its definition (2609.26758, 2610.02586).
 
 **Idea.**
@@ -358,7 +362,8 @@ applied to System One models. Mostly an application study.
   fairness, model collapse, text forensics, unlearning. Those pairings are where the
   Tier 1 proposals come from.
 - The two directions with the most immediate practical value are **B** (it targets an
-  attack for which every tested defence currently fails) and **H** (it attacks the
+  name-following that also costs clean accuracy and order stability; see the
+  correction in RANKED.md) and **H** (it attacks the
   correlated-error problem that limits every fast/slow cascade).
 - **A** and **F** are the cleanest research papers: each has a crisp falsifiable
   hypothesis and an open-model experiment that can be run on one GPU.
