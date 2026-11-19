@@ -1,0 +1,21 @@
+{
+ "model": "Qwen/Qwen3-0.6B",
+ "n": 150,
+ "k": 8,
+ "seconds": 296.6,
+ "accuracy": {
+  "honest": 0.72,
+  "neutral": 0.7133333333333334,
+  "nonsense": 0.72,
+  "swap": 0.6066666666666667
+ },
+ "mean_confidence": {
+  "honest": 0.9262219999233882,
+  "neutral": 0.8666287380456924,
+  "nonsense": 0.8873885188500087,
+  "swap": 0.879598339398702
+ },
+ "swap_follow_rate": 0.16666666666666666,
+ "swap_follow_n": 108,
+ "chance_follow_rate": 0.14285714285714285
+}
